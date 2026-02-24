@@ -72,10 +72,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8013776714022349326}
-    - targetCorrespondingSourceObject: {fileID: 1965719434400382, guid: 8dadaf0872bd0ca4db3e0962eb36b9f1,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7041887890097277407}
   m_SourcePrefab: {fileID: 100100000, guid: 8dadaf0872bd0ca4db3e0962eb36b9f1, type: 3}
 --- !u!1 &2850347393306315150 stripped
 GameObject:
@@ -162,24 +158,3 @@ MonoBehaviour:
     layerIndex: 0
   _eventTable:
     _entries: []
---- !u!114 &7041887890097277407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2850347393306315150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acfd78b46a297624fb7e4df254abc85c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 1965719434400382, guid: 8dadaf0872bd0ca4db3e0962eb36b9f1, type: 3}
-  shootPoint: {fileID: 3697108221453020642, guid: e3f4476ae7615e1448038ef8beab6f21,
-    type: 3}
-  goalTarget: {fileID: 4364418909993267269, guid: 1c3adb1ffabe02148adc6075c132a722,
-    type: 3}
-  shootForce: 20
-  randomOffsetX: 2
-  randomOffsetY: 2
-  respawnDelay: 3

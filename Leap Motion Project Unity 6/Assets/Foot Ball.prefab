@@ -83,11 +83,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1965719434400382, guid: 8dadaf0872bd0ca4db3e0962eb36b9f1,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2901720992299817611}
+      addedObject: {fileID: 1897697261481721647}
     - targetCorrespondingSourceObject: {fileID: 1965719434400382, guid: 8dadaf0872bd0ca4db3e0962eb36b9f1,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8680783861458061526}
+      addedObject: {fileID: 1656831944297216615}
   m_SourcePrefab: {fileID: 100100000, guid: 8dadaf0872bd0ca4db3e0962eb36b9f1, type: 3}
 --- !u!1 &7905434214833983302 stripped
 GameObject:
@@ -143,7 +143,34 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &2901720992299817611
+--- !u!114 &1897697261481721647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7905434214833983302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0625e574c0d47a241b7dfc7a8c67ca2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactionControllers:
+    _values: []
+  hoverActivationRadius: 0.2
+  touchActivationRadius: 0.075
+  multiGraspHoldingMode: 0
+  _autoGenerateLayers: 1
+  _templateLayer:
+    layerIndex: 0
+  _interactionLayer:
+    layerIndex: 8
+  _interactionNoContactLayer:
+    layerIndex: 9
+  _contactBoneLayer:
+    layerIndex: 10
+  _drawControllerRuntimeGizmos: 0
+--- !u!114 &1656831944297216615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,24 +201,3 @@ MonoBehaviour:
     layerIndex: 0
   _eventTable:
     _entries: []
---- !u!114 &8680783861458061526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7905434214833983302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acfd78b46a297624fb7e4df254abc85c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 1965719434400382, guid: 8dadaf0872bd0ca4db3e0962eb36b9f1, type: 3}
-  shootPoint: {fileID: 3697108221453020642, guid: e3f4476ae7615e1448038ef8beab6f21,
-    type: 3}
-  goalTarget: {fileID: 4364418909993267269, guid: 1c3adb1ffabe02148adc6075c132a722,
-    type: 3}
-  shootForce: 20
-  randomOffsetX: 2
-  randomOffsetY: 2
-  respawnDelay: 3
