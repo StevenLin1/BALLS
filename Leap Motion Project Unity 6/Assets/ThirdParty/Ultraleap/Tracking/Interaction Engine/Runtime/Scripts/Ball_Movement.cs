@@ -8,10 +8,10 @@ public class BallShooter : MonoBehaviour
     public Transform goalTarget;
 
     [Header("Shoot Settings")]
-    public float shootForce = 20f;
-    public float randomOffsetX = 2f;
-    public float randomOffsetY = 2f;
-    public float respawnDelay = 3f;
+    public float shootForce = 6.5f;
+    public float randomOffsetX = 0.5f;
+    public float randomOffsetY = 0.5f;
+    public float respawnDelay = 4f;
 
     private GameObject currentBall;
 
