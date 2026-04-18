@@ -1,6 +1,7 @@
 using System;
 using Leap.Unity.Interaction;
 using UnityEngine;
+using Leap.Unity;
 
 namespace KitchenGame
 {
@@ -57,6 +58,29 @@ namespace KitchenGame
         public float DistanceTo(Vector3 worldPosition)
         {
             return Vector3.Distance(transform.position, worldPosition);
+        }
+
+        public bool IsHeldBy(Chirality chirality)
+        {
+            if (interactionBehaviour == null || !interactionBehaviour.isGrasped)
+            {
+                return false;
+            }
+
+            foreach (var hand in interactionBehaviour.graspingHands)
+            {
+                if (hand == null || hand.leapHand == null)
+                {
+                    continue;
+                }
+
+                if (hand.leapHand.IsLeft == (chirality == Chirality.Left))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void HandleGraspBegin()

@@ -1,4 +1,5 @@
 using System;
+using Leap.Unity;
 
 namespace KitchenGame
 {
@@ -40,6 +41,7 @@ namespace KitchenGame
         Counter,
         CuttingBoard,
         Stove,
+        Toaster,
         PrepBowl,
         Serving
     }
@@ -58,6 +60,7 @@ namespace KitchenGame
     [Serializable]
     public struct KitchenGestureContext
     {
+        public Chirality Chirality;
         public KitchenGestureType Gesture;
         public KitchenStation Station;
         public KitchenItem HeldItem;

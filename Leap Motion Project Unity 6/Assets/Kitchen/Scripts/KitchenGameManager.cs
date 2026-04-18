@@ -86,7 +86,7 @@ namespace KitchenGame
             FeedbackIssued?.Invoke(activeRecipe != null ? activeRecipe.RecipeName : "Kitchen Freeplay");
         }
 
-        public void RegisterGesture(KitchenGestureType gesture, Vector3 worldPosition, KitchenItem heldItem, float intensity)
+        public void RegisterGesture(Leap.Unity.Chirality chirality, KitchenGestureType gesture, Vector3 worldPosition, KitchenItem heldItem, float intensity)
         {
             if (!roundActive)
             {
@@ -99,7 +99,7 @@ namespace KitchenGame
                 return;
             }
 
-            if (!station.TryApplyGesture(gesture, heldItem, intensity, out var ingredient, out var stateBefore, out var stateAfter))
+            if (!station.TryApplyGesture(gesture, heldItem, chirality, intensity, out var ingredient, out var stateBefore, out var stateAfter, out var awardedScore))
             {
                 Penalize("Gesture did not hit a valid kitchen target");
                 return;
@@ -107,6 +107,7 @@ namespace KitchenGame
 
             var context = new KitchenGestureContext
             {
+                Chirality = chirality,
                 Gesture = gesture,
                 Station = station,
                 HeldItem = heldItem,
@@ -121,6 +122,11 @@ namespace KitchenGame
                 if (allowFreeplayWithoutRecipe)
                 {
                     AwardFreeplayPoints(context);
+                    if (awardedScore > 0)
+                    {
+                        score += awardedScore;
+                        ScoreChanged?.Invoke(score);
+                    }
                 }
 
                 return;

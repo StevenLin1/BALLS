@@ -34,6 +34,9 @@ namespace KitchenGame
         [SerializeField]
         private float gestureCooldown = 0.2f;
 
+        [SerializeField]
+        private float toasterWaveSpeedThreshold = 0.35f;
+
         private readonly Dictionary<Chirality, HandGestureState> handStates = new();
 
         private void Reset()
@@ -79,7 +82,7 @@ namespace KitchenGame
 
             if (!state.PinchActive && hand.PinchStrength >= pinchThreshold && now >= state.NextAllowedGestureTime)
             {
-                EmitGesture(KitchenGestureType.Pinch, palmPosition, heldItem, hand.PinchStrength);
+                EmitGesture(chirality, KitchenGestureType.Pinch, palmPosition, heldItem, hand.PinchStrength);
                 state.PinchActive = true;
                 state.NextAllowedGestureTime = now + gestureCooldown;
             }
@@ -97,13 +100,13 @@ namespace KitchenGame
                 palmVelocity.y <= -chopVelocityThreshold &&
                 now >= state.NextAllowedGestureTime)
             {
-                EmitGesture(KitchenGestureType.Chop, palmPosition, heldItem, Mathf.Abs(palmVelocity.y));
+                EmitGesture(chirality, KitchenGestureType.Chop, palmPosition, heldItem, Mathf.Abs(palmVelocity.y));
                 state.NextAllowedGestureTime = now + gestureCooldown;
                 state.StirAccumulator = 0f;
             }
             else if (state.StirAccumulator >= stirDistanceThreshold && now >= state.NextAllowedGestureTime)
             {
-                EmitGesture(KitchenGestureType.Stir, palmPosition, heldItem, Mathf.Max(1f, planarVelocity));
+                EmitGesture(chirality, KitchenGestureType.Stir, palmPosition, heldItem, Mathf.Max(1f, planarVelocity));
                 state.NextAllowedGestureTime = now + gestureCooldown;
                 state.StirAccumulator = 0f;
             }
@@ -112,7 +115,24 @@ namespace KitchenGame
                      palmVelocity.y >= flipVelocityThreshold &&
                      now >= state.NextAllowedGestureTime)
             {
-                EmitGesture(KitchenGestureType.Flip, palmPosition, heldItem, palmVelocity.y);
+                EmitGesture(chirality, KitchenGestureType.Flip, palmPosition, heldItem, palmVelocity.y);
+                state.NextAllowedGestureTime = now + gestureCooldown;
+                state.StirAccumulator = 0f;
+            }
+            else if (heldItem is KitchenTool spatula &&
+                     spatula.ToolType == KitchenToolType.Spatula &&
+                     palmVelocity.y >= flipVelocityThreshold &&
+                     now >= state.NextAllowedGestureTime)
+            {
+                EmitGesture(chirality, KitchenGestureType.Flip, palmPosition, heldItem, palmVelocity.y);
+                state.NextAllowedGestureTime = now + gestureCooldown;
+                state.StirAccumulator = 0f;
+            }
+            else if (heldItem == null &&
+                     planarVelocity >= toasterWaveSpeedThreshold &&
+                     now >= state.NextAllowedGestureTime)
+            {
+                EmitGesture(chirality, KitchenGestureType.Stir, palmPosition, null, planarVelocity);
                 state.NextAllowedGestureTime = now + gestureCooldown;
                 state.StirAccumulator = 0f;
             }
@@ -145,9 +165,9 @@ namespace KitchenGame
             return bestItem;
         }
 
-        private void EmitGesture(KitchenGestureType gesture, Vector3 worldPosition, KitchenItem heldItem, float intensity)
+        private void EmitGesture(Chirality chirality, KitchenGestureType gesture, Vector3 worldPosition, KitchenItem heldItem, float intensity)
         {
-            gameManager.RegisterGesture(gesture, worldPosition, heldItem, intensity);
+            gameManager.RegisterGesture(chirality, gesture, worldPosition, heldItem, intensity);
         }
 
         private struct HandGestureState

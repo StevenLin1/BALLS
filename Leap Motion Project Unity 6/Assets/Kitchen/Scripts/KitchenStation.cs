@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Leap.Unity;
 
 namespace KitchenGame
 {
@@ -15,9 +16,17 @@ namespace KitchenGame
         private float actionRadius = 0.35f;
 
         private readonly List<KitchenItem> occupants = new();
+        private KitchenToasterStation toasterStation;
+        private KitchenStoveCooker stoveCooker;
 
         public KitchenStationType StationType => stationType;
         public Vector3 ActionPosition => actionPoint != null ? actionPoint.position : transform.position;
+
+        private void Awake()
+        {
+            toasterStation = GetComponent<KitchenToasterStation>();
+            stoveCooker = GetComponent<KitchenStoveCooker>();
+        }
 
         public bool IsInRange(Vector3 worldPosition)
         {
@@ -39,67 +48,89 @@ namespace KitchenGame
             return GetComponentInChildren<KitchenIngredient>();
         }
 
-        public bool TryApplyGesture(KitchenGestureType gesture, KitchenItem heldItem, float intensity, out KitchenIngredient ingredient,
-            out KitchenIngredientState stateBefore, out KitchenIngredientState stateAfter)
+        public bool TryApplyGesture(KitchenGestureType gesture, KitchenItem heldItem, Chirality chirality, float intensity, out KitchenIngredient ingredient,
+            out KitchenIngredientState stateBefore, out KitchenIngredientState stateAfter, out int awardedScore)
         {
+            awardedScore = 0;
             ingredient = GetPrimaryIngredient();
             stateBefore = ingredient != null ? ingredient.CurrentState : KitchenIngredientState.None;
             stateAfter = stateBefore;
 
-            if (ingredient == null)
-            {
-                return false;
-            }
-
             bool applied = stationType switch
             {
-                KitchenStationType.CuttingBoard => TryCut(gesture, heldItem, ingredient, intensity),
-                KitchenStationType.Stove => TryCook(gesture, heldItem, ingredient, intensity),
+                KitchenStationType.CuttingBoard => TryCut(gesture, heldItem, chirality, out ingredient, out stateBefore, out stateAfter),
+                KitchenStationType.Stove => TryCook(gesture, heldItem, chirality, out ingredient, out stateBefore, out stateAfter, out awardedScore),
+                KitchenStationType.Toaster => TryToast(gesture, out ingredient, out stateBefore, out stateAfter),
                 KitchenStationType.PrepBowl => TryMix(gesture, ingredient),
                 KitchenStationType.Serving => TryPlate(gesture, ingredient),
                 _ => false
             };
 
-            stateAfter = ingredient.CurrentState;
             return applied;
         }
 
-        private bool TryCut(KitchenGestureType gesture, KitchenItem heldItem, KitchenIngredient ingredient, float intensity)
+        public IEnumerable<T> GetOccupants<T>() where T : KitchenItem
         {
-            if (gesture != KitchenGestureType.Chop)
-            {
-                return false;
-            }
+            CleanupOccupants();
 
-            if (heldItem is not KitchenTool tool || tool.ToolType != KitchenToolType.Knife)
+            foreach (var occupant in occupants)
             {
-                return false;
+                if (occupant is T typed)
+                {
+                    yield return typed;
+                }
             }
-
-            return ingredient.ApplyChop(intensity);
         }
 
-        private bool TryCook(KitchenGestureType gesture, KitchenItem heldItem, KitchenIngredient ingredient, float intensity)
+        public bool HasTool(KitchenToolType toolType)
         {
-            if (gesture != KitchenGestureType.Stir && gesture != KitchenGestureType.Flip)
+            foreach (var tool in GetOccupants<KitchenTool>())
             {
-                return false;
+                if (tool.ToolType == toolType)
+                {
+                    return true;
+                }
             }
 
-            if (heldItem is KitchenTool tool &&
-                tool.ToolType != KitchenToolType.Pan &&
-                tool.ToolType != KitchenToolType.Spatula)
+            return false;
+        }
+
+        public KitchenIngredient GetNearestIngredient(Vector3 worldPosition, bool heldOnly, bool requireDualSidedCooking)
+        {
+            KitchenIngredient best = null;
+            var bestDistance = float.PositiveInfinity;
+
+            foreach (var ingredient in GetOccupants<KitchenIngredient>())
             {
-                return false;
+                if (ingredient == null)
+                {
+                    continue;
+                }
+
+                if (heldOnly && !ingredient.IsHeld)
+                {
+                    continue;
+                }
+
+                if (requireDualSidedCooking && !ingredient.SupportsDualSidedCooking)
+                {
+                    continue;
+                }
+
+                var distance = ingredient.DistanceTo(worldPosition);
+                if (distance < bestDistance)
+                {
+                    best = ingredient;
+                    bestDistance = distance;
+                }
             }
 
-            var bonus = gesture == KitchenGestureType.Flip ? 1.5f : 1f;
-            return ingredient.ApplyCookingPulse(intensity * bonus);
+            return best;
         }
 
         private bool TryMix(KitchenGestureType gesture, KitchenIngredient ingredient)
         {
-            if (gesture != KitchenGestureType.Stir)
+            if (gesture != KitchenGestureType.Stir || ingredient == null)
             {
                 return false;
             }
@@ -107,9 +138,68 @@ namespace KitchenGame
             return ingredient.Mix();
         }
 
+        private bool TryCut(KitchenGestureType gesture, KitchenItem heldItem, Chirality chirality, out KitchenIngredient ingredient,
+            out KitchenIngredientState stateBefore, out KitchenIngredientState stateAfter)
+        {
+            ingredient = GetNearestIngredient(ActionPosition, heldOnly: true, requireDualSidedCooking: false);
+            stateBefore = ingredient != null ? ingredient.CurrentState : KitchenIngredientState.None;
+            stateAfter = stateBefore;
+
+            if (gesture != KitchenGestureType.Chop)
+            {
+                if (ingredient != null)
+                {
+                    ingredient.ResetSliceProgress();
+                }
+                return false;
+            }
+
+            if (heldItem is not KitchenTool tool || tool.ToolType != KitchenToolType.Knife || ingredient == null)
+            {
+                if (ingredient != null)
+                {
+                    ingredient.ResetSliceProgress();
+                }
+                return false;
+            }
+
+            var applied = ingredient.ApplySliceStep(chirality, 0.35f, out _);
+            stateAfter = ingredient.CurrentState;
+            return applied;
+        }
+
+        private bool TryCook(KitchenGestureType gesture, KitchenItem heldItem, Chirality chirality, out KitchenIngredient ingredient,
+            out KitchenIngredientState stateBefore, out KitchenIngredientState stateAfter, out int awardedScore)
+        {
+            if (stoveCooker == null)
+            {
+                ingredient = GetPrimaryIngredient();
+                stateBefore = ingredient != null ? ingredient.CurrentState : KitchenIngredientState.None;
+                stateAfter = stateBefore;
+                awardedScore = 0;
+                return false;
+            }
+
+            return stoveCooker.TryHandleCookGesture(gesture, heldItem, chirality, out ingredient, out stateBefore, out stateAfter, out awardedScore);
+        }
+
+        private bool TryToast(KitchenGestureType gesture, out KitchenIngredient ingredient, out KitchenIngredientState stateBefore, out KitchenIngredientState stateAfter)
+        {
+            ingredient = null;
+            stateBefore = KitchenIngredientState.None;
+            stateAfter = KitchenIngredientState.None;
+
+            if (gesture != KitchenGestureType.Stir || toasterStation == null)
+            {
+                return false;
+            }
+
+            return toasterStation.TryStartToasting();
+        }
+
         private bool TryPlate(KitchenGestureType gesture, KitchenIngredient ingredient)
         {
-            if (gesture != KitchenGestureType.Place && gesture != KitchenGestureType.Pinch)
+            if ((gesture != KitchenGestureType.Place && gesture != KitchenGestureType.Pinch) || ingredient == null)
             {
                 return false;
             }
