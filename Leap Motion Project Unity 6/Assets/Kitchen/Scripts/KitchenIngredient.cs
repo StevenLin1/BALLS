@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Leap.Unity;
+using Leap.Unity.Interaction;
 
 namespace KitchenGame
 {
@@ -262,12 +263,36 @@ namespace KitchenGame
                 {
                     var offset = UnityEngine.Random.insideUnitSphere * sliceScatterRadius;
                     offset.y = Mathf.Abs(offset.y) * 0.25f;
-                    Instantiate(slicedPrefab, origin + offset, transform.rotation);
+                    var spawnedSlice = Instantiate(slicedPrefab, origin + offset, transform.rotation);
+                    ConfigureSpawnedInteractions(spawnedSlice);
                 }
             }
 
             gameObject.SetActive(false);
             return true;
+        }
+
+        private static void ConfigureSpawnedInteractions(GameObject spawnedObject)
+        {
+            if (spawnedObject == null)
+            {
+                return;
+            }
+
+            var interactionManager = FindFirstObjectByType<InteractionManager>();
+            if (interactionManager == null)
+            {
+                return;
+            }
+
+            var interactionBehaviours = spawnedObject.GetComponentsInChildren<InteractionBehaviour>(true);
+            foreach (var interactionBehaviour in interactionBehaviours)
+            {
+                if (interactionBehaviour != null)
+                {
+                    interactionBehaviour.manager = interactionManager;
+                }
+            }
         }
 
         private void SetState(KitchenIngredientState newState)

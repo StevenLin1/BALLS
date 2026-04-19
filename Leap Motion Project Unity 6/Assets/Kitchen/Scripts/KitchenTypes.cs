@@ -18,10 +18,10 @@ namespace KitchenGame
         None,
         Vegetable,
         Meat,
-        Fish,
+        Cheese,
         Sauce,
         Seasoning,
-        Dough
+        Bread
     }
 
     public enum KitchenIngredientState
