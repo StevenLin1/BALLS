@@ -170,6 +170,22 @@ namespace KitchenGame
             return nearest;
         }
 
+        public void AddScore(int amount, string feedbackMessage = null)
+        {
+            if (!roundActive)
+            {
+                return;
+            }
+
+            score = Mathf.Max(0, score + amount);
+            ScoreChanged?.Invoke(score);
+
+            if (!string.IsNullOrWhiteSpace(feedbackMessage))
+            {
+                FeedbackIssued?.Invoke(feedbackMessage);
+            }
+        }
+
         private bool DoesCurrentStepMatch(KitchenGestureContext context)
         {
             var step = CurrentStep;
