@@ -177,6 +177,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114892109605653334, guid: 33edf201cbc6fe645ad9078697cd2aea,
+        type: 3}
+      propertyPath: hoverActivationRadius
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114892109605653334, guid: 33edf201cbc6fe645ad9078697cd2aea,
+        type: 3}
+      propertyPath: touchActivationRadius
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -406,7 +416,7 @@ Transform:
   m_GameObject: {fileID: 157115203}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.034, y: 0.289, z: -0.625}
+  m_LocalPosition: {x: -0.034, y: 0.289, z: -1.137}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -651,7 +661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 197039456}
   m_Layer: 0
-  m_Name: ZoneAnchor_Center
+  m_Name: ZoneAnchor2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -666,7 +676,7 @@ Transform:
   m_GameObject: {fileID: 197039455}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.948, y: -0.09, z: 0}
+  m_LocalPosition: {x: 0.059, y: -0.09, z: 0.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1325,7 +1335,7 @@ PrefabInstance:
     - target: {fileID: 4342426906173675393, guid: 59dcb336c12e9c7438dc1e8515e28d29,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.025
+      value: -0.034
       objectReference: {fileID: 0}
     - target: {fileID: 4342426906173675393, guid: 59dcb336c12e9c7438dc1e8515e28d29,
         type: 3}
@@ -1335,7 +1345,7 @@ PrefabInstance:
     - target: {fileID: 4342426906173675393, guid: 59dcb336c12e9c7438dc1e8515e28d29,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.003
+      value: 0.947
       objectReference: {fileID: 0}
     - target: {fileID: 4342426906173675393, guid: 59dcb336c12e9c7438dc1e8515e28d29,
         type: 3}
@@ -1619,17 +1629,17 @@ PrefabInstance:
     - target: {fileID: 4780950550655648969, guid: 2c25d42adeb174049963f6df4c9b7c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.39691937
+      value: -0.40591937
       objectReference: {fileID: 0}
     - target: {fileID: 4780950550655648969, guid: 2c25d42adeb174049963f6df4c9b7c9a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.019067489
+      value: 0.032
       objectReference: {fileID: 0}
     - target: {fileID: 4780950550655648969, guid: 2c25d42adeb174049963f6df4c9b7c9a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.08586615
+      value: 0.029866159
       objectReference: {fileID: 0}
     - target: {fileID: 4780950550655648969, guid: 2c25d42adeb174049963f6df4c9b7c9a,
         type: 3}
@@ -2002,6 +2012,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.3868912, y: 0.14846978, z: 1.3868914}
   m_Center: {x: -0.00049161917, y: 0.025659781, z: 0.00049406296}
+--- !u!1 &662219254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 662219255}
+  m_Layer: 0
+  m_Name: ZoneAnchor4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &662219255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662219254}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.762, y: -0.09, z: 0.52}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &688076447
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2033,17 +2074,17 @@ PrefabInstance:
     - target: {fileID: 1641217663033415792, guid: bdcb1163aaa701e47a05799e04111331,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.003
       objectReference: {fileID: 0}
     - target: {fileID: 1641217663033415792, guid: bdcb1163aaa701e47a05799e04111331,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0119999945
+      value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: 1641217663033415792, guid: bdcb1163aaa701e47a05799e04111331,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.016
       objectReference: {fileID: 0}
     - target: {fileID: 1641217663033415792, guid: bdcb1163aaa701e47a05799e04111331,
         type: 3}
@@ -2164,7 +2205,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7442823, y: 0.1400006, z: 1.0980407}
+  m_Size: {x: 0.7442823, y: 0.28, z: 1.0980407}
   m_Center: {x: 0.04155316, y: 0.000000037252903, z: -0.069152854}
 --- !u!114 &719883252
 MonoBehaviour:
@@ -2250,7 +2291,7 @@ Transform:
   m_GameObject: {fileID: 740392600}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2277,6 +2318,7 @@ MonoBehaviour:
   - {fileID: 1223157679}
   - {fileID: 197039456}
   - {fileID: 1609709631}
+  - {fileID: 662219255}
   startingZoneIndex: 0
   moveSpeed: 3.5
   snapToStartingZoneOnEnable: 1
@@ -2342,17 +2384,17 @@ PrefabInstance:
     - target: {fileID: 4780950550655648969, guid: 2c25d42adeb174049963f6df4c9b7c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.3573738
+      value: -0.3663738
       objectReference: {fileID: 0}
     - target: {fileID: 4780950550655648969, guid: 2c25d42adeb174049963f6df4c9b7c9a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.04766749
+      value: 0.067
       objectReference: {fileID: 0}
     - target: {fileID: 4780950550655648969, guid: 2c25d42adeb174049963f6df4c9b7c9a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.082609475
+      value: 0.02660948
       objectReference: {fileID: 0}
     - target: {fileID: 4780950550655648969, guid: 2c25d42adeb174049963f6df4c9b7c9a,
         type: 3}
@@ -3030,7 +3072,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7442823, y: 0.1400006, z: 1.0980406}
+  m_Size: {x: 0.7442823, y: 0.28, z: 1.0980406}
   m_Center: {x: 0.041553516, y: 0.000000037252903, z: -0.069153085}
 --- !u!114 &919135284
 MonoBehaviour:
@@ -3121,7 +3163,7 @@ PrefabInstance:
     - target: {fileID: 4780950550655648969, guid: 2c25d42adeb174049963f6df4c9b7c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.40109998
+      value: -0.41009998
       objectReference: {fileID: 0}
     - target: {fileID: 4780950550655648969, guid: 2c25d42adeb174049963f6df4c9b7c9a,
         type: 3}
@@ -3131,7 +3173,7 @@ PrefabInstance:
     - target: {fileID: 4780950550655648969, guid: 2c25d42adeb174049963f6df4c9b7c9a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.07530004
+      value: 0.019300044
       objectReference: {fileID: 0}
     - target: {fileID: 4780950550655648969, guid: 2c25d42adeb174049963f6df4c9b7c9a,
         type: 3}
@@ -3503,8 +3545,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.31690374, y: 0.18051314, z: 1.7663009}
-  m_Center: {x: -0.007000297, y: -0.00006885826, z: -0.8647479}
+  m_Size: {x: 0.4, y: 0.5710366, z: 1.7663009}
+  m_Center: {x: -0.007000297, y: 0.09044938, z: -0.8647477}
 --- !u!1001 &1220511636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3594,7 +3636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1223157679}
   m_Layer: 0
-  m_Name: ZoneAnchor_Left
+  m_Name: ZoneAnchor1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3609,7 +3651,7 @@ Transform:
   m_GameObject: {fileID: 1223157678}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.09, z: 0}
+  m_LocalPosition: {x: -0.244, y: -0.09, z: 0.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3855,17 +3897,17 @@ PrefabInstance:
     - target: {fileID: 1641217663033415792, guid: bdcb1163aaa701e47a05799e04111331,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.08939999
+      value: -0.106
       objectReference: {fileID: 0}
     - target: {fileID: 1641217663033415792, guid: bdcb1163aaa701e47a05799e04111331,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.012
+      value: 0.014
       objectReference: {fileID: 0}
     - target: {fileID: 1641217663033415792, guid: bdcb1163aaa701e47a05799e04111331,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.041400015
+      value: -0.032
       objectReference: {fileID: 0}
     - target: {fileID: 1641217663033415792, guid: bdcb1163aaa701e47a05799e04111331,
         type: 3}
@@ -4233,7 +4275,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7442822, y: 0.1400006, z: 1.0980405}
+  m_Size: {x: 0.7442822, y: 0.28, z: 1.0980405}
   m_Center: {x: 0.04155339, y: 0.000000037252903, z: -0.06915284}
 --- !u!114 &1515940566
 MonoBehaviour:
@@ -4592,7 +4634,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1609709631}
   m_Layer: 0
-  m_Name: ZoneAnchor_Right
+  m_Name: ZoneAnchor3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4607,7 +4649,7 @@ Transform:
   m_GameObject: {fileID: 1609709630}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.779, y: -0.09, z: 0}
+  m_LocalPosition: {x: 0.891, y: -0.146, z: 0.393}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5438,52 +5480,52 @@ PrefabInstance:
     - target: {fileID: 2857312372824612671, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1856
+      value: 1.4161992
       objectReference: {fileID: 0}
     - target: {fileID: 2857312372824612671, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1856
+      value: 1.4161992
       objectReference: {fileID: 0}
     - target: {fileID: 2857312372824612671, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.1282568
+      value: 2.5422027
       objectReference: {fileID: 0}
     - target: {fileID: 2857312372824612671, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.9736
+      value: 0.98089
       objectReference: {fileID: 0}
     - target: {fileID: 2857312372824612671, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2652
+      value: -0.24766
       objectReference: {fileID: 0}
     - target: {fileID: 2857312372824612671, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.8853
+      value: 0.85759
       objectReference: {fileID: 0}
     - target: {fileID: 2857312372824612671, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.70657337
+      value: 0.70700985
       objectReference: {fileID: 0}
     - target: {fileID: 2857312372824612671, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.70657337
+      value: -0.70700985
       objectReference: {fileID: 0}
     - target: {fileID: 2857312372824612671, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.027462276
+      value: -0.011708829
       objectReference: {fileID: 0}
     - target: {fileID: 2857312372824612671, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.027462276
+      value: -0.011708813
       objectReference: {fileID: 0}
     - target: {fileID: 2857312372824612671, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}
@@ -5498,12 +5540,37 @@ PrefabInstance:
     - target: {fileID: 2857312372824612671, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 4.452
+      value: -1.898
       objectReference: {fileID: 0}
     - target: {fileID: 3237216058166887813, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}
       propertyPath: m_Name
       value: FreeSpatula03
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266952170646613043, guid: e2013dc2188d6423f8e140a476a0739e,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266952170646613043, guid: e2013dc2188d6423f8e140a476a0739e,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.034902193
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266952170646613043, guid: e2013dc2188d6423f8e140a476a0739e,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 8.173369e-10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266952170646613043, guid: e2013dc2188d6423f8e140a476a0739e,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.14578539
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266952170646613043, guid: e2013dc2188d6423f8e140a476a0739e,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.01367833
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5786,7 +5853,7 @@ PrefabInstance:
     - target: {fileID: 4342426906173675393, guid: 59dcb336c12e9c7438dc1e8515e28d29,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.003
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 4342426906173675393, guid: 59dcb336c12e9c7438dc1e8515e28d29,
         type: 3}
@@ -6018,17 +6085,17 @@ PrefabInstance:
     - target: {fileID: 1641217663033415792, guid: bdcb1163aaa701e47a05799e04111331,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.05159998
+      value: -0.075
       objectReference: {fileID: 0}
     - target: {fileID: 1641217663033415792, guid: bdcb1163aaa701e47a05799e04111331,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08067613
+      value: 0.087
       objectReference: {fileID: 0}
     - target: {fileID: 1641217663033415792, guid: bdcb1163aaa701e47a05799e04111331,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.08478528
+      value: -0.023
       objectReference: {fileID: 0}
     - target: {fileID: 1641217663033415792, guid: bdcb1163aaa701e47a05799e04111331,
         type: 3}
@@ -6230,8 +6297,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.25700647, y: 0.039952133, z: 1.9878324}
-  m_Center: {x: -0.06850321, y: 0.0019680064, z: 0.39928252}
+  m_Size: {x: 0.7245701, y: 0.3, z: 1.9878324}
+  m_Center: {x: 0.14922467, y: 0.00196801, z: 0.39928094}
 --- !u!54 &2027483078
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6316,52 +6383,52 @@ PrefabInstance:
     - target: {fileID: 7835455880646214474, guid: 7de4b22e30d10ed45ad4fd836ae607d8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.3377
+      value: 0.1566
       objectReference: {fileID: 0}
     - target: {fileID: 7835455880646214474, guid: 7de4b22e30d10ed45ad4fd836ae607d8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2084
+      value: -0.1711
       objectReference: {fileID: 0}
     - target: {fileID: 7835455880646214474, guid: 7de4b22e30d10ed45ad4fd836ae607d8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.6494
+      value: 0.6086
       objectReference: {fileID: 0}
     - target: {fileID: 7835455880646214474, guid: 7de4b22e30d10ed45ad4fd836ae607d8,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9734883
+      value: 0.7261282
       objectReference: {fileID: 0}
     - target: {fileID: 7835455880646214474, guid: 7de4b22e30d10ed45ad4fd836ae607d8,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0027172142
+      value: -0.028037712
       objectReference: {fileID: 0}
     - target: {fileID: 7835455880646214474, guid: 7de4b22e30d10ed45ad4fd836ae607d8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.22842762
+      value: -0.02575883
       objectReference: {fileID: 0}
     - target: {fileID: 7835455880646214474, guid: 7de4b22e30d10ed45ad4fd836ae607d8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.011579917
+      value: 0.68650436
       objectReference: {fileID: 0}
     - target: {fileID: 7835455880646214474, guid: 7de4b22e30d10ed45ad4fd836ae607d8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0.606
+      value: -0.307
       objectReference: {fileID: 0}
     - target: {fileID: 7835455880646214474, guid: 7de4b22e30d10ed45ad4fd836ae607d8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -26.404
+      value: -4.353
       objectReference: {fileID: 0}
     - target: {fileID: 7835455880646214474, guid: 7de4b22e30d10ed45ad4fd836ae607d8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 1.221
+      value: 86.798
       objectReference: {fileID: 0}
     - target: {fileID: 8217473226905864931, guid: 7de4b22e30d10ed45ad4fd836ae607d8,
         type: 3}
@@ -6414,7 +6481,7 @@ Transform:
   m_GameObject: {fileID: 3661197658205417103}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.041719943, y: 0, z: -0.0000000027939677}
+  m_LocalPosition: {x: -0.04171992, y: -0.000000011175871, z: -0.000000019557774}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6430,7 +6497,7 @@ Transform:
   m_GameObject: {fileID: 8635835394424359744}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.023152672, y: -0.000000005122274, z: 2.3283064e-10}
+  m_LocalPosition: {x: -0.023152657, y: -0.0000000023283064, z: 0.0000000020954758}
   m_LocalScale: {x: 0.8252451, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6650,7 +6717,7 @@ Transform:
   m_GameObject: {fileID: 4488686307752731658}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.0000000027939677, w: 1}
-  m_LocalPosition: {x: -0.052353002, y: -0.000000010593794, z: 0.00000001071021}
+  m_LocalPosition: {x: -0.05235301, y: -0.000000011525117, z: 0.000000009313226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6681,7 +6748,7 @@ Transform:
   m_GameObject: {fileID: 8189970285648892963}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.028496277, y: 0.0000000055879354, z: -0.000000006519258}
+  m_LocalPosition: {x: -0.028496295, y: 0.000000016763806, z: 0.000000010244548}
   m_LocalScale: {x: 0.7903945, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6697,7 +6764,7 @@ Transform:
   m_GameObject: {fileID: 7121092886102123601}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.0000000037252899, w: 1}
-  m_LocalPosition: {x: -0.048462622, y: 0.000000004656613, z: -0.000000007683411}
+  m_LocalPosition: {x: -0.04846259, y: 0.000000004656613, z: 0.000000002561137}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6841,7 +6908,7 @@ Transform:
   m_GameObject: {fileID: 494426384603795480}
   serializedVersion: 2
   m_LocalRotation: {x: -0.10489069, y: 0.06845515, z: -0.06767924, w: 0.9898138}
-  m_LocalPosition: {x: -0.041046627, y: -0.0118279345, z: 0.0013907179}
+  m_LocalPosition: {x: -0.04104664, y: -0.0118279345, z: 0.0013907179}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6857,7 +6924,7 @@ Transform:
   m_GameObject: {fileID: 1541794011145181731}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.067697845, y: -0.0000000059183343, z: 0.000000007450581}
+  m_LocalPosition: {x: -0.06769784, y: -0.000000005918334, z: 0.000000007450581}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6892,7 +6959,7 @@ Transform:
   m_GameObject: {fileID: 5687142643374917700}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.040284757, y: -0.0000000019759552, z: 0.0000000055879354}
+  m_LocalPosition: {x: -0.040284794, y: -0.00000000756389, z: 0.000000005820766}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6938,7 +7005,7 @@ Transform:
   m_GameObject: {fileID: 7032695457108829861}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5351683, y: -0.3575552, z: -0.019904882, w: 0.7650837}
-  m_LocalPosition: {x: -0.028840668, y: 0.004964515, z: -0.025461845}
+  m_LocalPosition: {x: -0.028840661, y: 0.004964515, z: -0.025461845}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6954,7 +7021,7 @@ Transform:
   m_GameObject: {fileID: 1756668387901611000}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.035906974, y: -0.0000000024580473, z: -0.000000012820237}
+  m_LocalPosition: {x: -0.035906967, y: -0.0000000015267246, z: -0.00000001375156}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7067,7 +7134,7 @@ Transform:
   m_GameObject: {fileID: 6427053611878569208}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.0000000022700986, w: 1}
-  m_LocalPosition: {x: -0.058310416, y: 0.0000000031723175, z: -0.0000000019790605}
+  m_LocalPosition: {x: -0.058310438, y: -5.529728e-10, z: -0.0000000017462298}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7115,8 +7182,8 @@ Transform:
   m_GameObject: {fileID: 4050236792543031338}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02020105, y: -6.7085654e-10, z: 0.0000000033469405}
-  m_LocalScale: {x: 0.59768665, y: 0.99999994, z: 0.99999964}
+  m_LocalPosition: {x: -0.020201012, y: 0.0000000030544336, z: -3.783498e-10}
+  m_LocalScale: {x: 0.59768665, y: 0.99999994, z: 0.99999976}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3305201915551247230}
@@ -7131,7 +7198,7 @@ Transform:
   m_GameObject: {fileID: 6478712066900018935}
   serializedVersion: 2
   m_LocalRotation: {x: -0.07399493, y: -0.009242202, z: -0.07527789, w: 0.99437046}
-  m_LocalPosition: {x: -0.040181205, y: -0.012711663, z: -0.008802287}
+  m_LocalPosition: {x: -0.04018119, y: -0.012711663, z: -0.008802287}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7548,34 +7615,34 @@ MonoBehaviour:
     Id: 0
     Fingers:
     - bones:
-      - PrevJoint: {x: -0.10066175, y: -0.055999994, z: -0.05316848}
-        NextJoint: {x: -0.10066175, y: -0.055999994, z: -0.05316848}
-        Center: {x: -0.10066175, y: -0.055999994, z: -0.05316848}
+      - PrevJoint: {x: -0.10066175, y: -0.055999994, z: 0.4668315}
+        NextJoint: {x: -0.10066175, y: -0.055999994, z: 0.4668315}
+        Center: {x: -0.10066175, y: -0.055999994, z: 0.4668315}
         Direction: {x: 0, y: 0, z: 0}
         Length: 0
         Width: 0.008
         Type: 0
         Rotation: {x: 0.01990488, y: 0.35755518, z: -0.53516835, w: 0.7650837}
-      - PrevJoint: {x: -0.10066175, y: -0.055999994, z: -0.05316848}
-        NextJoint: {x: -0.07635861, y: -0.075096354, z: -0.018803157}
-        Center: {x: -0.08851018, y: -0.065548174, z: -0.03598582}
-        Direction: {x: 0.5258143, y: -0.41316223, z: 0.7435162}
+      - PrevJoint: {x: -0.10066175, y: -0.055999994, z: 0.4668315}
+        NextJoint: {x: -0.07635861, y: -0.075096354, z: 0.5011968}
+        Center: {x: -0.08851018, y: -0.065548174, z: 0.48401415}
+        Direction: {x: 0.5258143, y: -0.41316223, z: 0.7435157}
         Length: 0.046220005
         Width: 0.008
         Type: 1
         Rotation: {x: 0.01990488, y: 0.35755518, z: -0.53516835, w: 0.7650837}
-      - PrevJoint: {x: -0.07635861, y: -0.075096354, z: -0.018803157}
-        NextJoint: {x: -0.059758652, y: -0.08813989, z: 0.0046696505}
-        Center: {x: -0.06805863, y: -0.08161812, z: -0.007066753}
-        Direction: {x: 0.52581424, y: -0.41316238, z: 0.7435162}
+      - PrevJoint: {x: -0.07635861, y: -0.075096354, z: 0.5011968}
+        NextJoint: {x: -0.059758652, y: -0.08813989, z: 0.52466965}
+        Center: {x: -0.06805863, y: -0.08161812, z: 0.51293325}
+        Direction: {x: 0.52581424, y: -0.41316238, z: 0.7435174}
         Length: 0.031570002
         Width: 0.008
         Type: 2
         Rotation: {x: 0.01990488, y: 0.35755518, z: -0.53516835, w: 0.7650837}
-      - PrevJoint: {x: -0.059758652, y: -0.08813989, z: 0.0046696505}
-        NextJoint: {x: -0.04836425, y: -0.097093105, z: 0.020781646}
-        Center: {x: -0.05406145, y: -0.0926165, z: 0.012725648}
-        Direction: {x: 0.5258145, y: -0.41316167, z: 0.7435162}
+      - PrevJoint: {x: -0.059758652, y: -0.08813989, z: 0.52466965}
+        NextJoint: {x: -0.04836425, y: -0.097093105, z: 0.5407816}
+        Center: {x: -0.05406145, y: -0.0926165, z: 0.53272563}
+        Direction: {x: 0.5258145, y: -0.41316167, z: 0.74351496}
         Length: 0.02167
         Width: 0.008
         Type: 3
@@ -7583,41 +7650,41 @@ MonoBehaviour:
       Type: 0
       Id: 0
       HandId: 0
-      TipPosition: {x: -0.04836425, y: -0.097093105, z: 0.020781646}
-      Direction: {x: 0.52581424, y: -0.41316238, z: 0.7435162}
+      TipPosition: {x: -0.04836425, y: -0.097093105, z: 0.5407816}
+      Direction: {x: 0.52581424, y: -0.41316238, z: 0.7435174}
       Width: 0.008
       Length: 0.099460006
       IsExtended: 1
       TimeVisible: 0
     - bones:
-      - PrevJoint: {x: -0.10812965, y: -0.03789504, z: -0.043260645}
-        NextJoint: {x: -0.09681872, y: -0.047999993, z: 0.023149356}
-        Center: {x: -0.10247418, y: -0.042947516, z: -0.010055644}
+      - PrevJoint: {x: -0.10812965, y: -0.03789504, z: 0.47673935}
+        NextJoint: {x: -0.09681872, y: -0.047999993, z: 0.54314935}
+        Center: {x: -0.10247418, y: -0.042947516, z: 0.5099443}
         Direction: {x: 0.16604415, y: -0.14834048, z: 0.97489727}
         Length: 0.06812
         Width: 0.008
         Type: 0
         Rotation: {x: 0.074111775, y: 0.08401715, z: -0.006266236, w: 0.99368477}
-      - PrevJoint: {x: -0.09681872, y: -0.047999993, z: 0.023149356}
-        NextJoint: {x: -0.09021348, y: -0.053900972, z: 0.061930764}
-        Center: {x: -0.0935161, y: -0.050950482, z: 0.04254006}
-        Direction: {x: 0.16604437, y: -0.14834034, z: 0.9748971}
+      - PrevJoint: {x: -0.09681872, y: -0.047999993, z: 0.54314935}
+        NextJoint: {x: -0.09021348, y: -0.053900972, z: 0.58193076}
+        Center: {x: -0.0935161, y: -0.050950482, z: 0.56254005}
+        Direction: {x: 0.16604437, y: -0.14834034, z: 0.97489697}
         Length: 0.039780002
         Width: 0.008
         Type: 1
         Rotation: {x: 0.074111775, y: 0.08401715, z: -0.006266236, w: 0.99368477}
-      - PrevJoint: {x: -0.09021348, y: -0.053900972, z: 0.061930764}
-        NextJoint: {x: -0.0864974, y: -0.05722083, z: 0.08374896}
-        Center: {x: -0.08835544, y: -0.0555609, z: 0.07283986}
-        Direction: {x: 0.16604441, y: -0.14834046, z: 0.97489697}
+      - PrevJoint: {x: -0.09021348, y: -0.053900972, z: 0.58193076}
+        NextJoint: {x: -0.0864974, y: -0.05722083, z: 0.6037489}
+        Center: {x: -0.08835544, y: -0.0555609, z: 0.59283984}
+        Direction: {x: 0.16604441, y: -0.14834046, z: 0.9748955}
         Length: 0.02238
         Width: 0.008
         Type: 2
         Rotation: {x: 0.074111775, y: 0.08401715, z: -0.006266236, w: 0.99368477}
-      - PrevJoint: {x: -0.0864974, y: -0.05722083, z: 0.08374896}
-        NextJoint: {x: -0.08387059, y: -0.05956757, z: 0.09917183}
-        Center: {x: -0.08518399, y: -0.0583942, z: 0.09146039}
-        Direction: {x: 0.16604386, y: -0.14834002, z: 0.97489715}
+      - PrevJoint: {x: -0.0864974, y: -0.05722083, z: 0.6037489}
+        NextJoint: {x: -0.08387059, y: -0.05956757, z: 0.6191718}
+        Center: {x: -0.08518399, y: -0.0583942, z: 0.6114603}
+        Direction: {x: 0.16604386, y: -0.14834002, z: 0.9748976}
         Length: 0.01582
         Width: 0.008
         Type: 3
@@ -7625,41 +7692,41 @@ MonoBehaviour:
       Type: 1
       Id: 1
       HandId: 0
-      TipPosition: {x: -0.08387059, y: -0.05956757, z: 0.09917183}
-      Direction: {x: 0.16604441, y: -0.14834046, z: 0.97489697}
+      TipPosition: {x: -0.08387059, y: -0.05956757, z: 0.6191718}
+      Direction: {x: 0.16604441, y: -0.14834046, z: 0.9748955}
       Width: 0.008
       Length: 0.07798
       IsExtended: 1
       TimeVisible: 0
     - bones:
-      - PrevJoint: {x: -0.119118266, y: -0.0364172, z: -0.040604703}
-        NextJoint: {x: -0.11721123, y: -0.04599999, z: 0.023252117}
-        Center: {x: -0.11816475, y: -0.041208595, z: -0.008676293}
-        Direction: {x: 0.029520677, y: -0.14834037, z: 0.98849565}
+      - PrevJoint: {x: -0.119118266, y: -0.0364172, z: 0.47939527}
+        NextJoint: {x: -0.11721123, y: -0.04599999, z: 0.5432521}
+        Center: {x: -0.11816475, y: -0.041208595, z: 0.5113237}
+        Direction: {x: 0.029520677, y: -0.14834037, z: 0.988496}
         Length: 0.0646
         Width: 0.008
         Type: 0
         Rotation: {x: 0.075277895, y: 0.009242241, z: 0.073994935, w: 0.9943705}
-      - PrevJoint: {x: -0.11721123, y: -0.04599999, z: 0.023252117}
-        NextJoint: {x: -0.115893714, y: -0.052620426, z: 0.06736868}
-        Center: {x: -0.11655247, y: -0.049310207, z: 0.045310397}
-        Direction: {x: 0.029520858, y: -0.14834051, z: 0.98849565}
+      - PrevJoint: {x: -0.11721123, y: -0.04599999, z: 0.5432521}
+        NextJoint: {x: -0.115893714, y: -0.052620426, z: 0.58736867}
+        Center: {x: -0.11655247, y: -0.049310207, z: 0.56531036}
+        Direction: {x: 0.029520858, y: -0.14834051, z: 0.9884955}
         Length: 0.044630002
         Width: 0.008
         Type: 1
         Rotation: {x: 0.075277895, y: 0.009242241, z: 0.073994935, w: 0.9943705}
-      - PrevJoint: {x: -0.115893714, y: -0.052620426, z: 0.06736868}
-        NextJoint: {x: -0.11511643, y: -0.05652623, z: 0.09339577}
-        Center: {x: -0.11550507, y: -0.054573327, z: 0.08038223}
-        Direction: {x: 0.029520767, y: -0.1483404, z: 0.9884956}
+      - PrevJoint: {x: -0.115893714, y: -0.052620426, z: 0.58736867}
+        NextJoint: {x: -0.11511643, y: -0.05652623, z: 0.61339575}
+        Center: {x: -0.11550507, y: -0.054573327, z: 0.6003822}
+        Direction: {x: 0.029520767, y: -0.1483404, z: 0.9884953}
         Length: 0.026330002
         Width: 0.008
         Type: 2
         Rotation: {x: 0.075277895, y: 0.009242241, z: 0.073994935, w: 0.9943705}
-      - PrevJoint: {x: -0.11511643, y: -0.05652623, z: 0.09339577}
-        NextJoint: {x: -0.114602774, y: -0.05910735, z: 0.11059559}
-        Center: {x: -0.1148596, y: -0.05781679, z: 0.10199568}
-        Direction: {x: 0.02952057, y: -0.1483402, z: 0.98849547}
+      - PrevJoint: {x: -0.11511643, y: -0.05652623, z: 0.61339575}
+        NextJoint: {x: -0.114602774, y: -0.05910735, z: 0.63059556}
+        Center: {x: -0.1148596, y: -0.05781679, z: 0.6219957}
+        Direction: {x: 0.02952057, y: -0.1483402, z: 0.98849505}
         Length: 0.0174
         Width: 0.008
         Type: 3
@@ -7667,41 +7734,41 @@ MonoBehaviour:
       Type: 2
       Id: 2
       HandId: 0
-      TipPosition: {x: -0.114602774, y: -0.05910735, z: 0.11059559}
-      Direction: {x: 0.029520767, y: -0.1483404, z: 0.9884956}
+      TipPosition: {x: -0.114602774, y: -0.05910735, z: 0.63059556}
+      Direction: {x: 0.029520767, y: -0.1483404, z: 0.9884953}
       Width: 0.008
       Length: 0.088360004
       IsExtended: 1
       TimeVisible: 0
     - bones:
-      - PrevJoint: {x: -0.13041073, y: -0.037396252, z: -0.03964592}
-        NextJoint: {x: -0.13744718, y: -0.04599999, z: 0.017279156}
-        Center: {x: -0.13392895, y: -0.04169812, z: -0.011183383}
-        Direction: {x: -0.12131806, y: -0.14834028, z: 0.9814668}
+      - PrevJoint: {x: -0.13041073, y: -0.037396252, z: 0.48035407}
+        NextJoint: {x: -0.13744718, y: -0.04599999, z: 0.5372791}
+        Center: {x: -0.13392895, y: -0.04169812, z: 0.5088166}
+        Direction: {x: -0.12131806, y: -0.14834028, z: 0.9814665}
         Length: 0.058000002
         Width: 0.008
         Type: 0
         Rotation: {x: 0.06767924, y: -0.06845518, z: 0.10489069, w: 0.9898138}
-      - PrevJoint: {x: -0.13744718, y: -0.04599999, z: 0.017279156}
-        NextJoint: {x: -0.1424661, y: -0.05213684, z: 0.05788244}
-        Center: {x: -0.13995664, y: -0.049068414, z: 0.037580796}
-        Direction: {x: -0.121317856, y: -0.14834057, z: 0.9814668}
+      - PrevJoint: {x: -0.13744718, y: -0.04599999, z: 0.5372791}
+        NextJoint: {x: -0.1424661, y: -0.05213684, z: 0.5778824}
+        Center: {x: -0.13995664, y: -0.049068414, z: 0.55758077}
+        Direction: {x: -0.121317856, y: -0.14834057, z: 0.98146677}
         Length: 0.04137
         Width: 0.008
         Type: 1
         Rotation: {x: 0.06767924, y: -0.06845518, z: 0.10489069, w: 0.9898138}
-      - PrevJoint: {x: -0.1424661, y: -0.05213684, z: 0.05788244}
-        NextJoint: {x: -0.14557792, y: -0.05594176, z: 0.08305707}
-        Center: {x: -0.14402202, y: -0.0540393, z: 0.07046975}
-        Direction: {x: -0.12131869, y: -0.14834005, z: 0.981467}
+      - PrevJoint: {x: -0.1424661, y: -0.05213684, z: 0.5778824}
+        NextJoint: {x: -0.14557792, y: -0.05594176, z: 0.603057}
+        Center: {x: -0.14402202, y: -0.0540393, z: 0.5904697}
+        Direction: {x: -0.12131869, y: -0.14834005, z: 0.9814666}
         Length: 0.02565
         Width: 0.008
         Type: 2
         Rotation: {x: 0.06767924, y: -0.06845518, z: 0.10489069, w: 0.9898138}
-      - PrevJoint: {x: -0.14557792, y: -0.05594176, z: 0.08305707}
-        NextJoint: {x: -0.1476767, y: -0.058508053, z: 0.10003644}
-        Center: {x: -0.1466273, y: -0.057224907, z: 0.09154676}
-        Direction: {x: -0.121316984, y: -0.14834063, z: 0.9814667}
+      - PrevJoint: {x: -0.14557792, y: -0.05594176, z: 0.603057}
+        NextJoint: {x: -0.1476767, y: -0.058508053, z: 0.6200364}
+        Center: {x: -0.1466273, y: -0.057224907, z: 0.61154675}
+        Direction: {x: -0.121316984, y: -0.14834063, z: 0.98146796}
         Length: 0.0173
         Width: 0.008
         Type: 3
@@ -7709,41 +7776,41 @@ MonoBehaviour:
       Type: 3
       Id: 3
       HandId: 0
-      TipPosition: {x: -0.1476767, y: -0.058508053, z: 0.10003644}
-      Direction: {x: -0.12131869, y: -0.14834005, z: 0.981467}
+      TipPosition: {x: -0.1476767, y: -0.058508053, z: 0.6200364}
+      Direction: {x: -0.12131869, y: -0.14834005, z: 0.9814666}
       Width: 0.008
       Length: 0.08432
       IsExtended: 1
       TimeVisible: 0
     - bones:
-      - PrevJoint: {x: -0.14141408, y: -0.044316843, z: -0.04181211}
-        NextJoint: {x: -0.15533744, y: -0.049999997, z: 0.009728725}
-        Center: {x: -0.14837575, y: -0.04715842, z: -0.016041692}
-        Direction: {x: -0.25932878, y: -0.105851255, z: 0.95997083}
+      - PrevJoint: {x: -0.14141408, y: -0.044316843, z: 0.47818786}
+        NextJoint: {x: -0.15533744, y: -0.049999997, z: 0.5297287}
+        Center: {x: -0.14837575, y: -0.04715842, z: 0.5039583}
+        Direction: {x: -0.25932878, y: -0.105851255, z: 0.95997113}
         Length: 0.05369
         Width: 0.008
         Type: 0
         Rotation: {x: 0.029145649, y: -0.13843814, z: 0.17725913, w: 0.97394294}
-      - PrevJoint: {x: -0.15533744, y: -0.049999997, z: 0.009728725}
-        NextJoint: {x: -0.16382788, y: -0.05346556, z: 0.041158173}
-        Center: {x: -0.15958266, y: -0.05173278, z: 0.02544345}
-        Direction: {x: -0.25932932, y: -0.105851024, z: 0.9599708}
+      - PrevJoint: {x: -0.15533744, y: -0.049999997, z: 0.5297287}
+        NextJoint: {x: -0.16382788, y: -0.05346556, z: 0.5611582}
+        Center: {x: -0.15958266, y: -0.05173278, z: 0.5454434}
+        Direction: {x: -0.25932932, y: -0.105851024, z: 0.9599714}
         Length: 0.032740004
         Width: 0.008
         Type: 1
         Rotation: {x: 0.029145649, y: -0.13843814, z: 0.17725913, w: 0.97394294}
-      - PrevJoint: {x: -0.16382788, y: -0.05346556, z: 0.041158173}
-        NextJoint: {x: -0.16852432, y: -0.055382535, z: 0.05854325}
-        Center: {x: -0.16617611, y: -0.054424047, z: 0.04985071}
-        Direction: {x: -0.25932872, y: -0.10585172, z: 0.959971}
+      - PrevJoint: {x: -0.16382788, y: -0.05346556, z: 0.5611582}
+        NextJoint: {x: -0.16852432, y: -0.055382535, z: 0.57854325}
+        Center: {x: -0.16617611, y: -0.054424047, z: 0.5698507}
+        Direction: {x: -0.25932872, y: -0.10585172, z: 0.9599704}
         Length: 0.018110001
         Width: 0.008
         Type: 2
         Rotation: {x: 0.029145649, y: -0.13843814, z: 0.17725913, w: 0.97394294}
-      - PrevJoint: {x: -0.16852432, y: -0.055382535, z: 0.05854325}
-        NextJoint: {x: -0.17266321, y: -0.05707191, z: 0.07386438}
-        Center: {x: -0.17059377, y: -0.056227222, z: 0.06620382}
-        Direction: {x: -0.25932875, y: -0.105850525, z: 0.9599704}
+      - PrevJoint: {x: -0.16852432, y: -0.055382535, z: 0.57854325}
+        NextJoint: {x: -0.17266321, y: -0.05707191, z: 0.5938644}
+        Center: {x: -0.17059377, y: -0.056227222, z: 0.5862038}
+        Direction: {x: -0.25932875, y: -0.105850525, z: 0.9599709}
         Length: 0.01596
         Width: 0.008
         Type: 3
@@ -7751,13 +7818,13 @@ MonoBehaviour:
       Type: 4
       Id: 4
       HandId: 0
-      TipPosition: {x: -0.17266321, y: -0.05707191, z: 0.07386438}
-      Direction: {x: -0.25932872, y: -0.10585172, z: 0.959971}
+      TipPosition: {x: -0.17266321, y: -0.05707191, z: 0.5938644}
+      Direction: {x: -0.25932872, y: -0.10585172, z: 0.9599704}
       Width: 0.008
       Length: 0.06681001
       IsExtended: 1
       TimeVisible: 0
-    PalmPosition: {x: -0.120000005, y: -0.049999997, z: 0.0000000104907345}
+    PalmPosition: {x: -0.120000005, y: -0.049999997, z: 0.52}
     PalmVelocity: {x: 0, y: 0, z: 0}
     PalmNormal: {x: 1.7470582e-22, y: -1, z: 3.996803e-15}
     Direction: {x: 7.1054274e-15, y: -3.996803e-15, z: 1}
@@ -7766,15 +7833,15 @@ MonoBehaviour:
     PinchStrength: 0
     PinchDistance: 0
     PalmWidth: 0.085
-    StabilizedPalmPosition: {x: -0.120000005, y: -0.049999997, z: 0.0000000104907345}
-    WristPosition: {x: -0.12887, y: -0.05049999, z: -0.08512}
+    StabilizedPalmPosition: {x: -0.120000005, y: -0.049999997, z: 0.52}
+    WristPosition: {x: -0.12887, y: -0.05049999, z: 0.43488}
     TimeVisible: 0
     Confidence: 1
     IsLeft: 1
     Arm:
-      PrevJoint: {x: -0.1270581, y: -0.04599999, z: -0.3}
-      NextJoint: {x: -0.12705812, y: -0.04599999, z: -0.04999999}
-      Center: {x: -0.12705812, y: -0.04599999, z: -0.175}
+      PrevJoint: {x: -0.1270581, y: -0.04599999, z: 0.21999997}
+      NextJoint: {x: -0.12705812, y: -0.04599999, z: 0.47}
+      Center: {x: -0.12705812, y: -0.04599999, z: 0.34499997}
       Direction: {x: -0.000000059604645, y: 0, z: 1.0000001}
       Length: 0.25
       Width: 0.041
@@ -7830,8 +7897,8 @@ Transform:
   m_GameObject: {fileID: 6880396221837997839}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.016346782, y: 0.0000000124510615, z: -0.00000001792796}
-  m_LocalScale: {x: 0.9548735, y: 0.99999994, z: 0.99999994}
+  m_LocalPosition: {x: -0.01634676, y: 0.000000013382384, z: -0.000000010477379}
+  m_LocalScale: {x: 0.9548735, y: 0.99999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5946114969457272194}
@@ -7878,7 +7945,7 @@ Transform:
   m_GameObject: {fileID: 7191433302716473264}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02955237, y: -0.000000013724359, z: 0.000000012805685}
+  m_LocalPosition: {x: -0.029552396, y: -0.000000013724359, z: 0.0000000044237822}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8311,34 +8378,34 @@ MonoBehaviour:
     Id: 0
     Fingers:
     - bones:
-      - PrevJoint: {x: 0.10066173, y: -0.055999994, z: -0.053168494}
-        NextJoint: {x: 0.10066173, y: -0.055999994, z: -0.053168494}
-        Center: {x: 0.10066173, y: -0.055999994, z: -0.053168494}
+      - PrevJoint: {x: 0.10066173, y: -0.055999994, z: 0.46683148}
+        NextJoint: {x: 0.10066173, y: -0.055999994, z: 0.46683148}
+        Center: {x: 0.10066173, y: -0.055999994, z: 0.46683148}
         Direction: {x: 0, y: 0, z: 0}
         Length: 0
         Width: 0.008
         Type: 0
         Rotation: {x: 0.019904926, y: -0.3575551, z: 0.53516835, w: 0.7650837}
-      - PrevJoint: {x: 0.10066173, y: -0.055999994, z: -0.053168494}
-        NextJoint: {x: 0.07635861, y: -0.075096354, z: -0.018803168}
-        Center: {x: 0.08851017, y: -0.065548174, z: -0.03598583}
+      - PrevJoint: {x: 0.10066173, y: -0.055999994, z: 0.46683148}
+        NextJoint: {x: 0.07635861, y: -0.075096354, z: 0.5011968}
+        Center: {x: 0.08851017, y: -0.065548174, z: 0.48401415}
         Direction: {x: -0.52581394, y: -0.41316223, z: 0.74351627}
         Length: 0.046220005
         Width: 0.008
         Type: 1
         Rotation: {x: 0.019904926, y: -0.3575551, z: 0.53516835, w: 0.7650837}
-      - PrevJoint: {x: 0.07635861, y: -0.075096354, z: -0.018803168}
-        NextJoint: {x: 0.059758652, y: -0.08813989, z: 0.0046696397}
-        Center: {x: 0.06805863, y: -0.08161812, z: -0.007066764}
-        Direction: {x: -0.52581424, y: -0.41316238, z: 0.7435162}
+      - PrevJoint: {x: 0.07635861, y: -0.075096354, z: 0.5011968}
+        NextJoint: {x: 0.059758652, y: -0.08813989, z: 0.52466965}
+        Center: {x: 0.06805863, y: -0.08161812, z: 0.51293325}
+        Direction: {x: -0.52581424, y: -0.41316238, z: 0.7435174}
         Length: 0.031570002
         Width: 0.008
         Type: 2
         Rotation: {x: 0.019904926, y: -0.3575551, z: 0.53516835, w: 0.7650837}
-      - PrevJoint: {x: 0.059758652, y: -0.08813989, z: 0.0046696397}
-        NextJoint: {x: 0.04836425, y: -0.097093105, z: 0.020781638}
-        Center: {x: 0.05406145, y: -0.0926165, z: 0.012725639}
-        Direction: {x: -0.5258145, y: -0.41316167, z: 0.74351627}
+      - PrevJoint: {x: 0.059758652, y: -0.08813989, z: 0.52466965}
+        NextJoint: {x: 0.04836425, y: -0.097093105, z: 0.5407816}
+        Center: {x: 0.05406145, y: -0.0926165, z: 0.53272563}
+        Direction: {x: -0.5258145, y: -0.41316167, z: 0.74351496}
         Length: 0.02167
         Width: 0.008
         Type: 3
@@ -8346,41 +8413,41 @@ MonoBehaviour:
       Type: 0
       Id: 0
       HandId: 0
-      TipPosition: {x: 0.04836425, y: -0.097093105, z: 0.020781638}
-      Direction: {x: -0.52581424, y: -0.41316238, z: 0.7435162}
+      TipPosition: {x: 0.04836425, y: -0.097093105, z: 0.5407816}
+      Direction: {x: -0.52581424, y: -0.41316238, z: 0.7435174}
       Width: 0.008
       Length: 0.099460006
       IsExtended: 1
       TimeVisible: 0
     - bones:
-      - PrevJoint: {x: 0.10812965, y: -0.03789504, z: -0.04326066}
-        NextJoint: {x: 0.09681872, y: -0.047999993, z: 0.023149341}
-        Center: {x: 0.10247418, y: -0.042947516, z: -0.010055659}
-        Direction: {x: -0.16604415, y: -0.14834048, z: 0.97489727}
+      - PrevJoint: {x: 0.10812965, y: -0.03789504, z: 0.47673932}
+        NextJoint: {x: 0.09681872, y: -0.047999993, z: 0.54314935}
+        Center: {x: 0.10247418, y: -0.042947516, z: 0.5099443}
+        Direction: {x: -0.16604415, y: -0.14834048, z: 0.97489774}
         Length: 0.06812
         Width: 0.008
         Type: 0
         Rotation: {x: 0.074111775, y: -0.08401707, z: 0.0062662293, w: 0.99368477}
-      - PrevJoint: {x: 0.09681872, y: -0.047999993, z: 0.023149341}
-        NextJoint: {x: 0.09021349, y: -0.053900972, z: 0.06193075}
-        Center: {x: 0.09351611, y: -0.050950482, z: 0.042540044}
-        Direction: {x: -0.166044, y: -0.14834034, z: 0.9748971}
+      - PrevJoint: {x: 0.09681872, y: -0.047999993, z: 0.54314935}
+        NextJoint: {x: 0.09021349, y: -0.053900972, z: 0.58193076}
+        Center: {x: 0.09351611, y: -0.050950482, z: 0.56254005}
+        Direction: {x: -0.166044, y: -0.14834034, z: 0.97489697}
         Length: 0.039780002
         Width: 0.008
         Type: 1
         Rotation: {x: 0.074111775, y: -0.08401707, z: 0.0062662293, w: 0.99368477}
-      - PrevJoint: {x: 0.09021349, y: -0.053900972, z: 0.06193075}
-        NextJoint: {x: 0.08649742, y: -0.05722083, z: 0.083748944}
-        Center: {x: 0.08835545, y: -0.0555609, z: 0.07283985}
-        Direction: {x: -0.16604441, y: -0.14834046, z: 0.97489697}
+      - PrevJoint: {x: 0.09021349, y: -0.053900972, z: 0.58193076}
+        NextJoint: {x: 0.08649742, y: -0.05722083, z: 0.6037489}
+        Center: {x: 0.08835545, y: -0.0555609, z: 0.59283984}
+        Direction: {x: -0.16604441, y: -0.14834046, z: 0.9748955}
         Length: 0.02238
         Width: 0.008
         Type: 2
         Rotation: {x: 0.074111775, y: -0.08401707, z: 0.0062662293, w: 0.99368477}
-      - PrevJoint: {x: 0.08649742, y: -0.05722083, z: 0.083748944}
-        NextJoint: {x: 0.083870605, y: -0.05956757, z: 0.09917182}
-        Center: {x: 0.08518401, y: -0.0583942, z: 0.09146038}
-        Direction: {x: -0.16604386, y: -0.14834002, z: 0.97489715}
+      - PrevJoint: {x: 0.08649742, y: -0.05722083, z: 0.6037489}
+        NextJoint: {x: 0.083870605, y: -0.05956757, z: 0.6191718}
+        Center: {x: 0.08518401, y: -0.0583942, z: 0.6114603}
+        Direction: {x: -0.16604386, y: -0.14834002, z: 0.9748976}
         Length: 0.01582
         Width: 0.008
         Type: 3
@@ -8388,41 +8455,41 @@ MonoBehaviour:
       Type: 1
       Id: 1
       HandId: 0
-      TipPosition: {x: 0.083870605, y: -0.05956757, z: 0.09917182}
-      Direction: {x: -0.16604441, y: -0.14834046, z: 0.97489697}
+      TipPosition: {x: 0.083870605, y: -0.05956757, z: 0.6191718}
+      Direction: {x: -0.16604441, y: -0.14834046, z: 0.9748955}
       Width: 0.008
       Length: 0.07798
       IsExtended: 1
       TimeVisible: 0
     - bones:
-      - PrevJoint: {x: 0.119118266, y: -0.0364172, z: -0.040604725}
-        NextJoint: {x: 0.11721123, y: -0.04599999, z: 0.023252098}
-        Center: {x: 0.11816475, y: -0.041208595, z: -0.008676314}
-        Direction: {x: -0.029520677, y: -0.14834037, z: 0.98849577}
+      - PrevJoint: {x: 0.119118266, y: -0.0364172, z: 0.47939527}
+        NextJoint: {x: 0.11721123, y: -0.04599999, z: 0.54325205}
+        Center: {x: 0.11816475, y: -0.041208595, z: 0.5113237}
+        Direction: {x: -0.029520677, y: -0.14834037, z: 0.98849505}
         Length: 0.0646
         Width: 0.008
         Type: 0
         Rotation: {x: 0.075277895, y: -0.009242155, z: -0.07399494, w: 0.9943705}
-      - PrevJoint: {x: 0.11721123, y: -0.04599999, z: 0.023252098}
-        NextJoint: {x: 0.11589373, y: -0.052620426, z: 0.067368664}
-        Center: {x: 0.11655248, y: -0.049310207, z: 0.04531038}
-        Direction: {x: -0.029520525, y: -0.14834051, z: 0.98849565}
+      - PrevJoint: {x: 0.11721123, y: -0.04599999, z: 0.54325205}
+        NextJoint: {x: 0.11589373, y: -0.052620426, z: 0.58736867}
+        Center: {x: 0.11655248, y: -0.049310207, z: 0.56531036}
+        Direction: {x: -0.029520525, y: -0.14834051, z: 0.98849684}
         Length: 0.044630002
         Width: 0.008
         Type: 1
         Rotation: {x: 0.075277895, y: -0.009242155, z: -0.07399494, w: 0.9943705}
-      - PrevJoint: {x: 0.11589373, y: -0.052620426, z: 0.067368664}
-        NextJoint: {x: 0.11511645, y: -0.05652623, z: 0.093395755}
-        Center: {x: 0.115505084, y: -0.054573327, z: 0.08038221}
-        Direction: {x: -0.029520767, y: -0.1483404, z: 0.9884956}
+      - PrevJoint: {x: 0.11589373, y: -0.052620426, z: 0.58736867}
+        NextJoint: {x: 0.11511645, y: -0.05652623, z: 0.61339575}
+        Center: {x: 0.115505084, y: -0.054573327, z: 0.6003822}
+        Direction: {x: -0.029520767, y: -0.1483404, z: 0.9884953}
         Length: 0.026330002
         Width: 0.008
         Type: 2
         Rotation: {x: 0.075277895, y: -0.009242155, z: -0.07399494, w: 0.9943705}
-      - PrevJoint: {x: 0.11511645, y: -0.05652623, z: 0.093395755}
-        NextJoint: {x: 0.11460279, y: -0.05910735, z: 0.11059558}
-        Center: {x: 0.11485962, y: -0.05781679, z: 0.10199566}
-        Direction: {x: -0.02952057, y: -0.1483402, z: 0.98849547}
+      - PrevJoint: {x: 0.11511645, y: -0.05652623, z: 0.61339575}
+        NextJoint: {x: 0.11460279, y: -0.05910735, z: 0.63059556}
+        Center: {x: 0.11485962, y: -0.05781679, z: 0.6219957}
+        Direction: {x: -0.02952057, y: -0.1483402, z: 0.98849505}
         Length: 0.0174
         Width: 0.008
         Type: 3
@@ -8430,41 +8497,41 @@ MonoBehaviour:
       Type: 2
       Id: 2
       HandId: 0
-      TipPosition: {x: 0.11460279, y: -0.05910735, z: 0.11059558}
-      Direction: {x: -0.029520767, y: -0.1483404, z: 0.9884956}
+      TipPosition: {x: 0.11460279, y: -0.05910735, z: 0.63059556}
+      Direction: {x: -0.029520767, y: -0.1483404, z: 0.9884953}
       Width: 0.008
       Length: 0.088360004
       IsExtended: 1
       TimeVisible: 0
     - bones:
-      - PrevJoint: {x: 0.13041073, y: -0.037396252, z: -0.039645944}
-        NextJoint: {x: 0.13744718, y: -0.04599999, z: 0.017279131}
-        Center: {x: 0.13392895, y: -0.04169812, z: -0.011183406}
-        Direction: {x: 0.12131806, y: -0.14834028, z: 0.98146677}
+      - PrevJoint: {x: 0.13041073, y: -0.037396252, z: 0.48035404}
+        NextJoint: {x: 0.13744718, y: -0.04599999, z: 0.5372791}
+        Center: {x: 0.13392895, y: -0.04169812, z: 0.5088166}
+        Direction: {x: 0.12131806, y: -0.14834028, z: 0.981467}
         Length: 0.058000002
         Width: 0.008
         Type: 0
         Rotation: {x: 0.067679234, y: 0.06845527, z: -0.1048907, w: 0.9898138}
-      - PrevJoint: {x: 0.13744718, y: -0.04599999, z: 0.017279131}
-        NextJoint: {x: 0.1424661, y: -0.05213684, z: 0.057882413}
-        Center: {x: 0.13995664, y: -0.049068414, z: 0.037580773}
+      - PrevJoint: {x: 0.13744718, y: -0.04599999, z: 0.5372791}
+        NextJoint: {x: 0.1424661, y: -0.05213684, z: 0.5778824}
+        Center: {x: 0.13995664, y: -0.049068414, z: 0.55758077}
         Direction: {x: 0.121317856, y: -0.14834057, z: 0.98146677}
         Length: 0.04137
         Width: 0.008
         Type: 1
         Rotation: {x: 0.067679234, y: 0.06845527, z: -0.1048907, w: 0.9898138}
-      - PrevJoint: {x: 0.1424661, y: -0.05213684, z: 0.057882413}
-        NextJoint: {x: 0.14557792, y: -0.05594176, z: 0.08305704}
-        Center: {x: 0.14402202, y: -0.0540393, z: 0.07046972}
-        Direction: {x: 0.12131869, y: -0.14834005, z: 0.9814669}
+      - PrevJoint: {x: 0.1424661, y: -0.05213684, z: 0.5778824}
+        NextJoint: {x: 0.14557792, y: -0.05594176, z: 0.603057}
+        Center: {x: 0.14402202, y: -0.0540393, z: 0.5904697}
+        Direction: {x: 0.12131869, y: -0.14834005, z: 0.9814666}
         Length: 0.02565
         Width: 0.008
         Type: 2
         Rotation: {x: 0.067679234, y: 0.06845527, z: -0.1048907, w: 0.9898138}
-      - PrevJoint: {x: 0.14557792, y: -0.05594176, z: 0.08305704}
-        NextJoint: {x: 0.14767674, y: -0.058508053, z: 0.10003641}
-        Center: {x: 0.14662734, y: -0.057224907, z: 0.09154673}
-        Direction: {x: 0.121318705, y: -0.14834063, z: 0.9814667}
+      - PrevJoint: {x: 0.14557792, y: -0.05594176, z: 0.603057}
+        NextJoint: {x: 0.14767674, y: -0.058508053, z: 0.62003636}
+        Center: {x: 0.14662734, y: -0.057224907, z: 0.6115467}
+        Direction: {x: 0.121318705, y: -0.14834063, z: 0.9814645}
         Length: 0.0173
         Width: 0.008
         Type: 3
@@ -8472,41 +8539,41 @@ MonoBehaviour:
       Type: 3
       Id: 3
       HandId: 0
-      TipPosition: {x: 0.14767674, y: -0.058508053, z: 0.10003641}
-      Direction: {x: 0.12131869, y: -0.14834005, z: 0.9814669}
+      TipPosition: {x: 0.14767674, y: -0.058508053, z: 0.62003636}
+      Direction: {x: 0.12131869, y: -0.14834005, z: 0.9814666}
       Width: 0.008
       Length: 0.08432
       IsExtended: 1
       TimeVisible: 0
     - bones:
-      - PrevJoint: {x: 0.14141408, y: -0.044316843, z: -0.041812133}
-        NextJoint: {x: 0.15533744, y: -0.049999997, z: 0.009728698}
-        Center: {x: 0.14837575, y: -0.04715842, z: -0.016041718}
-        Direction: {x: 0.25932878, y: -0.105851255, z: 0.9599707}
+      - PrevJoint: {x: 0.14141408, y: -0.044316843, z: 0.47818786}
+        NextJoint: {x: 0.15533744, y: -0.049999997, z: 0.52972865}
+        Center: {x: 0.14837575, y: -0.04715842, z: 0.5039582}
+        Direction: {x: 0.25932878, y: -0.105851255, z: 0.95997}
         Length: 0.05369
         Width: 0.008
         Type: 0
         Rotation: {x: 0.029145634, y: 0.13843822, z: -0.17725913, w: 0.97394294}
-      - PrevJoint: {x: 0.15533744, y: -0.049999997, z: 0.009728698}
-        NextJoint: {x: 0.16382788, y: -0.05346556, z: 0.041158143}
-        Center: {x: 0.15958266, y: -0.05173278, z: 0.02544342}
-        Direction: {x: 0.25932932, y: -0.105851024, z: 0.9599708}
+      - PrevJoint: {x: 0.15533744, y: -0.049999997, z: 0.52972865}
+        NextJoint: {x: 0.16382788, y: -0.05346556, z: 0.5611581}
+        Center: {x: 0.15958266, y: -0.05173278, z: 0.5454434}
+        Direction: {x: 0.25932932, y: -0.105851024, z: 0.9599714}
         Length: 0.032740004
         Width: 0.008
         Type: 1
         Rotation: {x: 0.029145634, y: 0.13843822, z: -0.17725913, w: 0.97394294}
-      - PrevJoint: {x: 0.16382788, y: -0.05346556, z: 0.041158143}
-        NextJoint: {x: 0.16852432, y: -0.055382535, z: 0.05854322}
-        Center: {x: 0.16617611, y: -0.054424047, z: 0.04985068}
-        Direction: {x: 0.25932872, y: -0.10585172, z: 0.959971}
+      - PrevJoint: {x: 0.16382788, y: -0.05346556, z: 0.5611581}
+        NextJoint: {x: 0.16852432, y: -0.055382535, z: 0.5785432}
+        Center: {x: 0.16617611, y: -0.054424047, z: 0.5698507}
+        Direction: {x: 0.25932872, y: -0.10585172, z: 0.9599704}
         Length: 0.018110001
         Width: 0.008
         Type: 2
         Rotation: {x: 0.029145634, y: 0.13843822, z: -0.17725913, w: 0.97394294}
-      - PrevJoint: {x: 0.16852432, y: -0.055382535, z: 0.05854322}
-        NextJoint: {x: 0.17266321, y: -0.05707191, z: 0.07386435}
-        Center: {x: 0.17059377, y: -0.056227222, z: 0.06620379}
-        Direction: {x: 0.25932875, y: -0.105850525, z: 0.9599704}
+      - PrevJoint: {x: 0.16852432, y: -0.055382535, z: 0.5785432}
+        NextJoint: {x: 0.17266321, y: -0.05707191, z: 0.5938643}
+        Center: {x: 0.17059377, y: -0.056227222, z: 0.58620375}
+        Direction: {x: 0.25932875, y: -0.105850525, z: 0.9599709}
         Length: 0.01596
         Width: 0.008
         Type: 3
@@ -8514,13 +8581,13 @@ MonoBehaviour:
       Type: 4
       Id: 4
       HandId: 0
-      TipPosition: {x: 0.17266321, y: -0.05707191, z: 0.07386435}
-      Direction: {x: 0.25932872, y: -0.10585172, z: 0.959971}
+      TipPosition: {x: 0.17266321, y: -0.05707191, z: 0.5938643}
+      Direction: {x: 0.25932872, y: -0.10585172, z: 0.9599704}
       Width: 0.008
       Length: 0.06681001
       IsExtended: 1
       TimeVisible: 0
-    PalmPosition: {x: 0.120000005, y: -0.049999997, z: -0.0000000104907345}
+    PalmPosition: {x: 0.120000005, y: -0.049999997, z: 0.52}
     PalmVelocity: {x: 0, y: 0, z: 0}
     PalmNormal: {x: 1.7470582e-22, y: -1, z: 3.996803e-15}
     Direction: {x: 0.00000017484555, y: -3.996803e-15, z: 1}
@@ -8529,15 +8596,15 @@ MonoBehaviour:
     PinchStrength: 0
     PinchDistance: 0
     PalmWidth: 0.085
-    StabilizedPalmPosition: {x: 0.120000005, y: -0.049999997, z: -0.0000000104907345}
-    WristPosition: {x: 0.12887, y: -0.05049999, z: -0.085120015}
+    StabilizedPalmPosition: {x: 0.120000005, y: -0.049999997, z: 0.52}
+    WristPosition: {x: 0.12887, y: -0.05049999, z: 0.43487996}
     TimeVisible: 0
     Confidence: 1
     IsLeft: 0
     Arm:
-      PrevJoint: {x: 0.12705806, y: -0.04599999, z: -0.3}
-      NextJoint: {x: 0.1270581, y: -0.04599999, z: -0.050000016}
-      Center: {x: 0.12705809, y: -0.04599999, z: -0.17500001}
+      PrevJoint: {x: 0.12705806, y: -0.04599999, z: 0.21999997}
+      NextJoint: {x: 0.1270581, y: -0.04599999, z: 0.46999997}
+      Center: {x: 0.12705809, y: -0.04599999, z: 0.34499997}
       Direction: {x: 0.00000017881393, y: 0, z: 1}
       Length: 0.25
       Width: 0.041
@@ -8560,7 +8627,7 @@ Transform:
   m_GameObject: {fileID: 8932956758952034213}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.03734214, y: 0.000000009686637, z: -0.000000015599653}
+  m_LocalPosition: {x: -0.03734213, y: 0.00000001061796, z: -0.000000014202669}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8630,7 +8697,7 @@ Transform:
   m_GameObject: {fileID: 1513716224821610036}
   serializedVersion: 2
   m_LocalRotation: {x: -0.17725912, y: 0.13843809, z: -0.02914564, w: 0.9739428}
-  m_LocalPosition: {x: -0.03909134, y: -0.0055811475, z: 0.011322752}
+  m_LocalPosition: {x: -0.039091356, y: -0.0055811475, z: 0.011322752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8727,8 +8794,8 @@ Transform:
   m_GameObject: {fileID: 1626411918909327286}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02376647, y: -0.0000000022324835, z: 0.0000000114087015}
-  m_LocalScale: {x: 0.67447853, y: 0.99999994, z: 0.9999999}
+  m_LocalPosition: {x: -0.023766447, y: -0.000000001301161, z: 0.0000000114087015}
+  m_LocalScale: {x: 0.67447853, y: 1, z: 0.9999999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2271661723623084353}
@@ -8743,7 +8810,7 @@ Transform:
   m_GameObject: {fileID: 439233090671627726}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.000000002211891, w: 1}
-  m_LocalPosition: {x: -0.0614877, y: 0.000000007887138, z: 0.0000000127911335}
+  m_LocalPosition: {x: -0.06148771, y: 0.0000000069558155, z: 0.000000013722456}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8887,7 +8954,7 @@ Transform:
   m_GameObject: {fileID: 9196578406502976836}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.03590691, y: -2.580683e-10, z: -0.0000000065774657}
+  m_LocalPosition: {x: -0.035906933, y: -0.0000000039833585, z: -0.000000003783498}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8919,7 +8986,7 @@ Transform:
   m_GameObject: {fileID: 457423789615116313}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5351684, y: -0.35755515, z: -0.019904882, w: 0.7650836}
-  m_LocalPosition: {x: -0.028840654, y: 0.0049645095, z: -0.02546186}
+  m_LocalPosition: {x: -0.028840646, y: 0.0049645095, z: -0.02546186}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8935,7 +9002,7 @@ Transform:
   m_GameObject: {fileID: 2967016564890361592}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.04028474, y: 0.000000013030238, z: -0.000000025727786}
+  m_LocalPosition: {x: -0.04028475, y: 0.000000012098916, z: -0.000000025960617}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8966,7 +9033,7 @@ Transform:
   m_GameObject: {fileID: 4479178985166016587}
   serializedVersion: 2
   m_LocalRotation: {x: -0.073994935, y: -0.00924224, z: -0.0752779, w: 0.99437046}
-  m_LocalPosition: {x: -0.04018119, y: -0.0127116665, z: -0.008802287}
+  m_LocalPosition: {x: -0.040181212, y: -0.0127116665, z: -0.008802287}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8982,8 +9049,8 @@ Transform:
   m_GameObject: {fileID: 6914550613415388822}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02020102, y: 0.000000004916494, z: -0.0000000021827873}
-  m_LocalScale: {x: 0.59768665, y: 0.9999999, z: 0.9999999}
+  m_LocalPosition: {x: -0.020201005, y: 0.000000008641784, z: -0.0000000059080776}
+  m_LocalScale: {x: 0.59768665, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5340794597913443778}
@@ -9030,7 +9097,7 @@ Transform:
   m_GameObject: {fileID: 4535482131643761220}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.0000000023865139, w: 1}
-  m_LocalPosition: {x: -0.058310416, y: -0.000000012412784, z: 4.656613e-10}
+  m_LocalPosition: {x: -0.05831037, y: -0.0000000058935257, z: 2.3283064e-10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9046,7 +9113,7 @@ Transform:
   m_GameObject: {fileID: 2033378621945112857}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.037342157, y: 0.000000015017577, z: -0.000000008265488}
+  m_LocalPosition: {x: -0.03734215, y: 0.000000015017577, z: -0.000000007799827}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9093,7 +9160,7 @@ Transform:
   m_GameObject: {fileID: 291931049225586956}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.029552367, y: -0.000000008026333, z: 0.000000009546056}
+  m_LocalPosition: {x: -0.029552381, y: -0.000000008026333, z: 0.000000004889444}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9142,7 +9209,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.01634679, y: 0.000000016237248, z: -0.000000020721927}
-  m_LocalScale: {x: 0.9548735, y: 0.99999994, z: 0.9999999}
+  m_LocalScale: {x: 0.9548735, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3838447650777723710}
@@ -9237,8 +9304,8 @@ Transform:
   m_GameObject: {fileID: 8165609721637015818}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02376644, y: -6.723655e-10, z: -0.0000000020954758}
-  m_LocalScale: {x: 0.67447853, y: 0.99999994, z: 0.9999999}
+  m_LocalPosition: {x: -0.023766447, y: -0.0000000034663339, z: -0.0000000020954758}
+  m_LocalScale: {x: 0.67447853, y: 0.99999976, z: 0.9999999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8666807565860734973}
@@ -9253,7 +9320,7 @@ Transform:
   m_GameObject: {fileID: 7050464285029276530}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -7.566996e-10, w: 1}
-  m_LocalPosition: {x: -0.061487712, y: -0.0000000053842086, z: 0.000000017345883}
+  m_LocalPosition: {x: -0.061487727, y: -0.000000007246854, z: 0.00000002013985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9367,7 +9434,7 @@ Transform:
   m_GameObject: {fileID: 8269157710979076232}
   serializedVersion: 2
   m_LocalRotation: {x: -0.17725912, y: 0.13843818, z: -0.029145647, w: 0.9739429}
-  m_LocalPosition: {x: -0.039091356, y: -0.005581142, z: 0.011322752}
+  m_LocalPosition: {x: -0.039091334, y: -0.005581142, z: 0.011322752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9550,7 +9617,7 @@ Transform:
   m_GameObject: {fileID: 1159845455253937660}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02315265, y: -0.0000000068814643, z: 0.000000008614734}
+  m_LocalPosition: {x: -0.023152664, y: -0.000000008744109, z: 0.0000000067520887}
   m_LocalScale: {x: 0.8252451, y: 0.99999994, z: 0.9999999}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9582,7 +9649,7 @@ Transform:
   m_GameObject: {fileID: 6129135338649073715}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.041719917, y: 0.0000000018626451, z: -0.0000000027939677}
+  m_LocalPosition: {x: -0.04171993, y: 0.0000000055879354, z: 0.000000006519258}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9678,7 +9745,7 @@ Transform:
   m_GameObject: {fileID: 365648650086806253}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000014901158, y: -0, z: -0.0000000018626447, w: 1}
-  m_LocalPosition: {x: -0.04846264, y: 0.000000008381903, z: -0.0000000041909516}
+  m_LocalPosition: {x: -0.048462655, y: 0.000000008381903, z: -0.0000000088475645}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9700,8 +9767,8 @@ Transform:
   m_GameObject: {fileID: 1614717864142471839}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.028496295, y: 0.000000011175871, z: -0.000000006519258}
-  m_LocalScale: {x: 0.7903945, y: 0.99999994, z: 0.9999999}
+  m_LocalPosition: {x: -0.028496318, y: 0.000000022351742, z: 0.000000010244548}
+  m_LocalScale: {x: 0.7903945, y: 0.9999998, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2826373549237307915}
@@ -9731,7 +9798,7 @@ Transform:
   m_GameObject: {fileID: 6452316486234616502}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.052353006, y: 0.0000000022118911, z: 0.0000000022118911}
+  m_LocalPosition: {x: -0.052353, y: 0.0000000031432137, z: 0.000000003608875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9778,7 +9845,7 @@ Transform:
   m_GameObject: {fileID: 8261205600236063903}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.067697875, y: 0.0000000059183365, z: -0.000000007450581}
+  m_LocalPosition: {x: -0.06769788, y: 0.0000000059183374, z: -0.000000007450581}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9830,7 +9897,7 @@ Transform:
   m_GameObject: {fileID: 2690406193756826034}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0062662438, y: -0.08401719, z: -0.074111775, w: 0.9936847}
-  m_LocalPosition: {x: -0.03778384, y: -0.011377711, z: -0.01872103}
+  m_LocalPosition: {x: -0.037783846, y: -0.011377711, z: -0.01872103}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9892,3 +9959,4 @@ SceneRoots:
   - {fileID: 1223157679}
   - {fileID: 197039456}
   - {fileID: 1609709631}
+  - {fileID: 662219255}
