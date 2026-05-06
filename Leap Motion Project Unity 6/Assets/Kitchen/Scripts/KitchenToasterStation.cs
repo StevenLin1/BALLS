@@ -1,4 +1,5 @@
 using UnityEngine;
+using Leap.Unity;
 
 namespace KitchenGame
 {
@@ -11,10 +12,7 @@ namespace KitchenGame
         private Transform[] spawnPoints;
 
         [SerializeField]
-        private float requiredWaveDurationSeconds = 1f;
-
-        [SerializeField]
-        private float waveContinuationWindowSeconds = 0.35f;
+        private LeapProvider leapProvider;
 
         [SerializeField]
         private float bakeDurationSeconds = 2.5f;
@@ -22,15 +20,23 @@ namespace KitchenGame
         [SerializeField]
         private float cooldownSeconds = 1f;
 
+        private KitchenStation station;
         private float activeTimer = -1f;
         private float cooldownTimer;
-        private float waveProgressSeconds;
-        private float lastWaveGestureTime = -1f;
+        private bool leftHandWasInsideZone;
+        private bool rightHandWasInsideZone;
 
         public bool IsBusy => activeTimer > 0f;
-        public float WaveProgress01 => requiredWaveDurationSeconds > 0.01f
-            ? Mathf.Clamp01(waveProgressSeconds / requiredWaveDurationSeconds)
-            : 1f;
+
+        private void Awake()
+        {
+            station = GetComponent<KitchenStation>();
+
+            if (leapProvider == null)
+            {
+                leapProvider = FindFirstObjectByType<LeapProvider>();
+            }
+        }
 
         private void Update()
         {
@@ -39,12 +45,7 @@ namespace KitchenGame
                 cooldownTimer -= Time.deltaTime;
             }
 
-            if (activeTimer <= 0f &&
-                waveProgressSeconds > 0f &&
-                (lastWaveGestureTime < 0f || Time.time - lastWaveGestureTime > waveContinuationWindowSeconds))
-            {
-                waveProgressSeconds = 0f;
-            }
+            CheckForHandsEnteringZone();
 
             if (activeTimer <= 0f)
             {
@@ -71,27 +72,52 @@ namespace KitchenGame
                 return false;
             }
 
-            var now = Time.time;
-
-            if (lastWaveGestureTime < 0f || now - lastWaveGestureTime > waveContinuationWindowSeconds)
-            {
-                waveProgressSeconds = 0f;
-            }
-            else
-            {
-                waveProgressSeconds += now - lastWaveGestureTime;
-            }
-
-            lastWaveGestureTime = now;
-
-            if (waveProgressSeconds < requiredWaveDurationSeconds)
-            {
-                return false;
-            }
-
-            waveProgressSeconds = 0f;
             activeTimer = bakeDurationSeconds;
             return true;
+        }
+
+        private void CheckForHandsEnteringZone()
+        {
+            if (leapProvider == null || station == null || activeTimer > 0f || cooldownTimer > 0f)
+            {
+                return;
+            }
+
+            var frame = leapProvider.CurrentFrame;
+            if (frame == null || frame.Hands == null)
+            {
+                leftHandWasInsideZone = false;
+                rightHandWasInsideZone = false;
+                return;
+            }
+
+            var leftInsideNow = false;
+            var rightInsideNow = false;
+
+            foreach (var hand in frame.Hands)
+            {
+                var isInside = station.IsInRange(hand.PalmPosition);
+                if (hand.IsLeft)
+                {
+                    leftInsideNow |= isInside;
+                }
+                else
+                {
+                    rightInsideNow |= isInside;
+                }
+            }
+
+            if (leftInsideNow && !leftHandWasInsideZone)
+            {
+                TryStartToasting();
+            }
+            else if (rightInsideNow && !rightHandWasInsideZone)
+            {
+                TryStartToasting();
+            }
+
+            leftHandWasInsideZone = leftInsideNow;
+            rightHandWasInsideZone = rightInsideNow;
         }
 
         private void SpawnBatch()

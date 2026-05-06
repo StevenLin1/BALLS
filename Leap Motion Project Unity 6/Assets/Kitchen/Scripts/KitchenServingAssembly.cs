@@ -73,6 +73,28 @@ namespace KitchenGame
             consumedInstanceIds.Add(instanceId);
         }
 
+        public bool TryConsumeIngredientDirect(KitchenIngredient ingredient)
+        {
+            if (ingredient == null)
+            {
+                return false;
+            }
+
+            var instanceId = ingredient.gameObject.GetInstanceID();
+            if (consumedInstanceIds.Contains(instanceId))
+            {
+                return false;
+            }
+
+            if (!TryConsumeIngredient(ingredient))
+            {
+                return false;
+            }
+
+            consumedInstanceIds.Add(instanceId);
+            return true;
+        }
+
         private bool TryConsumeIngredient(KitchenIngredient ingredient)
         {
             if (ingredient == null || currentOrderIndex >= orderSlots.Length)

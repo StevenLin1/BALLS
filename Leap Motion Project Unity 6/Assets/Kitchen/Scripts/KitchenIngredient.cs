@@ -126,6 +126,16 @@ namespace KitchenGame
             return completed;
         }
 
+        public bool TryInstantSlice()
+        {
+            if (!sliceable || slicedPrefab == null || currentState != KitchenIngredientState.Raw)
+            {
+                return false;
+            }
+
+            return CompleteSlice();
+        }
+
         public void ResetSliceProgress()
         {
             sliceProgress = 0f;

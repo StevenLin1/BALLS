@@ -1,5 +1,6 @@
 using UnityEngine;
 using Leap.Unity;
+using System.Collections.Generic;
 
 namespace KitchenGame
 {
@@ -13,10 +14,19 @@ namespace KitchenGame
         private KitchenToolType requiredCookware = KitchenToolType.Pan;
 
         [SerializeField]
-        private float scoreForCookedMeat = 150f;
+        private KitchenServingAssembly servingAssembly;
 
         [SerializeField]
-        private float scoreForBurntMeat = 25f;
+        private float idealCookSeconds = 7f;
+
+        [SerializeField]
+        private float burnSeconds = 10f;
+
+        [SerializeField]
+        private float serveTransferCooldownSeconds = 0.25f;
+
+        private readonly Dictionary<KitchenIngredient, float> cookTimes = new();
+        private float nextAllowedServeTransferTime;
 
         private void Reset()
         {
@@ -29,24 +39,32 @@ namespace KitchenGame
             {
                 station = GetComponent<KitchenStation>();
             }
+
+            if (servingAssembly == null)
+            {
+                servingAssembly = FindFirstObjectByType<KitchenServingAssembly>();
+            }
         }
 
         private void Update()
         {
             if (station == null || !station.HasTool(requiredCookware))
             {
+                cookTimes.Clear();
                 return;
             }
 
             foreach (var ingredient in station.GetOccupants<KitchenIngredient>())
             {
-                if (ingredient == null || !ingredient.SupportsDualSidedCooking)
+                if (ingredient == null || ingredient.IngredientKind != KitchenIngredientKind.Meat)
                 {
                     continue;
                 }
 
-                ingredient.AdvanceCooking(Time.deltaTime);
+                AdvanceMeatCooking(ingredient, Time.deltaTime);
             }
+
+            CleanupMissingIngredients();
         }
 
         public bool TryHandleCookGesture(KitchenGestureType gesture, KitchenItem heldItem, Chirality chirality, out KitchenIngredient ingredient,
@@ -56,38 +74,94 @@ namespace KitchenGame
             stateBefore = ingredient != null ? ingredient.CurrentState : KitchenIngredientState.None;
             stateAfter = stateBefore;
             scoreAward = 0;
-
-            if (gesture != KitchenGestureType.Flip)
-            {
-                return false;
-            }
-
-            if (heldItem is not KitchenTool tool || tool.ToolType != KitchenToolType.Spatula)
-            {
-                return false;
-            }
-
-            ingredient = station.GetNearestIngredient(station.ActionPosition, heldOnly: false, requireDualSidedCooking: true);
-            if (ingredient == null)
-            {
-                return false;
-            }
-
-            if (!ingredient.FlipCookingSide())
-            {
-                return false;
-            }
-
-            stateAfter = ingredient.CurrentState;
-
-            if (stateBefore != stateAfter)
-            {
-                scoreAward = stateAfter == KitchenIngredientState.Cooked
-                    ? Mathf.RoundToInt(scoreForCookedMeat * ingredient.GetCookQuality01())
-                    : Mathf.RoundToInt(scoreForBurntMeat);
-            }
-
             return true;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            TryServeCookedMeat(other);
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            TryServeCookedMeat(other);
+        }
+
+        private void AdvanceMeatCooking(KitchenIngredient ingredient, float deltaTime)
+        {
+            if (ingredient.CurrentState == KitchenIngredientState.Burnt || ingredient.CurrentState == KitchenIngredientState.Plated)
+            {
+                return;
+            }
+
+            if (!cookTimes.TryGetValue(ingredient, out var elapsed))
+            {
+                elapsed = 0f;
+            }
+
+            elapsed += Mathf.Max(0f, deltaTime);
+            cookTimes[ingredient] = elapsed;
+
+            if (elapsed >= burnSeconds)
+            {
+                ingredient.ForceState(KitchenIngredientState.Burnt);
+            }
+            else if (elapsed >= idealCookSeconds)
+            {
+                ingredient.ForceState(KitchenIngredientState.Cooked);
+            }
+        }
+
+        private void CleanupMissingIngredients()
+        {
+            var keysToRemove = new List<KitchenIngredient>();
+
+            foreach (var pair in cookTimes)
+            {
+                if (pair.Key == null)
+                {
+                    keysToRemove.Add(pair.Key);
+                }
+            }
+
+            foreach (var ingredient in keysToRemove)
+            {
+                cookTimes.Remove(ingredient);
+            }
+        }
+
+        private void TryServeCookedMeat(Collider other)
+        {
+            if (Time.time < nextAllowedServeTransferTime || servingAssembly == null || other == null)
+            {
+                return;
+            }
+
+            var tool = other.GetComponentInParent<KitchenTool>();
+            if (tool == null || tool.ToolType != KitchenToolType.Spatula)
+            {
+                return;
+            }
+
+            var ingredient = station.GetNearestIngredient(station.ActionPosition, heldOnly: false, requireDualSidedCooking: false);
+            if (ingredient == null || ingredient.IngredientKind != KitchenIngredientKind.Meat)
+            {
+                return;
+            }
+
+            if (ingredient.CurrentState != KitchenIngredientState.Cooked &&
+                ingredient.CurrentState != KitchenIngredientState.Burnt)
+            {
+                return;
+            }
+
+            if (!servingAssembly.TryConsumeIngredientDirect(ingredient))
+            {
+                return;
+            }
+
+            cookTimes.Remove(ingredient);
+            nextAllowedServeTransferTime = Time.time + serveTransferCooldownSeconds;
         }
     }
 }
