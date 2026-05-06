@@ -35,6 +35,7 @@ namespace KitchenGame
         private readonly HashSet<int> consumedInstanceIds = new();
 
         public int CurrentOrderIndex => currentOrderIndex;
+        public int OrderSlotCount => orderSlots != null ? orderSlots.Length : 0;
 
         public event Action<int, ServingOrderResult> OrderCompleted;
 
@@ -93,6 +94,34 @@ namespace KitchenGame
 
             consumedInstanceIds.Add(instanceId);
             return true;
+        }
+
+        public ServingOrderSnapshot GetOrderSnapshot(int index)
+        {
+            if (orderSlots == null || index < 0 || index >= orderSlots.Length)
+            {
+                return default;
+            }
+
+            var slot = orderSlots[index];
+            return new ServingOrderSnapshot
+            {
+                OrderIndex = index,
+                IsConfigured = slot.IsConfigured,
+                IsCurrent = index == currentOrderIndex,
+                IsCompleted = slot.IsCompleted,
+                RequiredMeatCount = slot.requiredMeatCount,
+                RequiredCheeseCount = slot.requiredCheeseCount,
+                RequiredVegetableCount = slot.requiredVegetableCount,
+                MaxMeatCount = slot.maxMeatCount,
+                MaxCheeseCount = slot.maxCheeseCount,
+                MaxVegetableCount = slot.maxVegetableCount,
+                AcceptedMeatCount = slot.AcceptedMeatCount,
+                AcceptedCheeseCount = slot.AcceptedCheeseCount,
+                AcceptedVegetableCount = slot.AcceptedVegetableCount,
+                AcceptedBurntMeatCount = slot.AcceptedBurntMeatCount,
+                HasTopBun = slot.HasTopBun
+            };
         }
 
         private bool TryConsumeIngredient(KitchenIngredient ingredient)
@@ -311,6 +340,25 @@ namespace KitchenGame
             public int MismatchCount;
             public int BurntMeatCount;
             public string FeedbackMessage;
+        }
+
+        public struct ServingOrderSnapshot
+        {
+            public int OrderIndex;
+            public bool IsConfigured;
+            public bool IsCurrent;
+            public bool IsCompleted;
+            public int RequiredMeatCount;
+            public int RequiredCheeseCount;
+            public int RequiredVegetableCount;
+            public int MaxMeatCount;
+            public int MaxCheeseCount;
+            public int MaxVegetableCount;
+            public int AcceptedMeatCount;
+            public int AcceptedCheeseCount;
+            public int AcceptedVegetableCount;
+            public int AcceptedBurntMeatCount;
+            public bool HasTopBun;
         }
     }
 }
