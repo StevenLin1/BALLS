@@ -20,6 +20,21 @@ namespace KitchenGame
         private float topBunHeightBonus = 0.01f;
 
         [SerializeField]
+        private float stackBaseOffset = 0f;
+
+        [SerializeField]
+        private float meatStackThickness = 0.024f;
+
+        [SerializeField]
+        private float cheeseStackThickness = 0.008f;
+
+        [SerializeField]
+        private float vegetableStackThickness = 0.01f;
+
+        [SerializeField]
+        private float topBunStackThickness = 0.03f;
+
+        [SerializeField]
         private int completedOrderBaseScore = 200;
 
         [SerializeField]
@@ -223,9 +238,9 @@ namespace KitchenGame
 
             SpawnServedVisual(slot, ingredient);
             ReleaseIngredient(ingredient);
-            ingredient.gameObject.SetActive(false);
+            HideSourceIngredient(ingredient);
             RegisterIngredient(ref slot, ingredient);
-            Destroy(ingredient.gameObject);
+            Destroy(ingredient.gameObject, 0.02f);
 
             if (slot.IsCompleted)
             {
@@ -270,9 +285,9 @@ namespace KitchenGame
         private void SpawnServedVisual(ServingOrderSlot slot, KitchenIngredient sourceIngredient)
         {
             var targetParent = slot.StackRoot != null ? slot.StackRoot : slot.StackAnchor;
-            var stackHeight = GetStackHeight(slot, sourceIngredient);
-            var verticalExtent = GetIngredientVerticalExtent(sourceIngredient);
-            var targetPosition = slot.StackAnchor.position + Vector3.up * (stackHeight + verticalExtent);
+            var ingredientThickness = GetIngredientStackThickness(sourceIngredient);
+            var targetPosition = slot.StackAnchor.position +
+                                 Vector3.up * (stackBaseOffset + slot.CurrentStackHeight + ingredientThickness * 0.5f);
             var targetRotation = GetServingRotation(slot, sourceIngredient);
             var targetScale = sourceIngredient.transform.lossyScale;
 
@@ -308,6 +323,41 @@ namespace KitchenGame
             }
         }
 
+        private static void HideSourceIngredient(KitchenIngredient ingredient)
+        {
+            if (ingredient == null)
+            {
+                return;
+            }
+
+            var rigidbodies = ingredient.GetComponentsInChildren<Rigidbody>(true);
+            foreach (var rigidbody in rigidbodies)
+            {
+                rigidbody.linearVelocity = Vector3.zero;
+                rigidbody.angularVelocity = Vector3.zero;
+                rigidbody.isKinematic = true;
+                rigidbody.detectCollisions = false;
+            }
+
+            var colliders = ingredient.GetComponentsInChildren<Collider>(true);
+            foreach (var sourceCollider in colliders)
+            {
+                sourceCollider.enabled = false;
+            }
+
+            var renderers = ingredient.GetComponentsInChildren<Renderer>(true);
+            foreach (var renderer in renderers)
+            {
+                renderer.enabled = false;
+            }
+
+            var interactionBehaviours = ingredient.GetComponentsInChildren<InteractionBehaviour>(true);
+            foreach (var interactionBehaviour in interactionBehaviours)
+            {
+                interactionBehaviour.enabled = false;
+            }
+        }
+
         private static void ApplyWorldScale(Transform target, Vector3 desiredWorldScale)
         {
             if (target == null)
@@ -327,17 +377,6 @@ namespace KitchenGame
             return Mathf.Abs(divisor) > 0.0001f ? value / divisor : value;
         }
 
-        private static float GetIngredientVerticalExtent(KitchenIngredient ingredient)
-        {
-            var collider = ingredient.GetComponent<Collider>();
-            if (collider == null)
-            {
-                return 0f;
-            }
-
-            return Mathf.Max(0f, collider.bounds.extents.y);
-        }
-
         private static Quaternion GetServingRotation(ServingOrderSlot slot, KitchenIngredient ingredient)
         {
             var euler = slot.StackAnchor.rotation.eulerAngles;
@@ -349,21 +388,22 @@ namespace KitchenGame
             };
         }
 
-        private float GetStackHeight(ServingOrderSlot slot, KitchenIngredient ingredient)
+        private float GetIngredientStackThickness(KitchenIngredient ingredient)
         {
-            var height = slot.AcceptedLayerCount * stackHeightPerLayer;
-
-            if (ingredient.IngredientKind == KitchenIngredientKind.Bread)
+            return ingredient.IngredientKind switch
             {
-                height += topBunHeightBonus;
-            }
-
-            return height;
+                KitchenIngredientKind.Meat => meatStackThickness,
+                KitchenIngredientKind.Cheese => cheeseStackThickness,
+                KitchenIngredientKind.Vegetable => vegetableStackThickness,
+                KitchenIngredientKind.Bread => topBunStackThickness + topBunHeightBonus,
+                _ => stackHeightPerLayer
+            };
         }
 
         private void RegisterIngredient(ref ServingOrderSlot slot, KitchenIngredient ingredient)
         {
             slot.AcceptedLayerCount++;
+            slot.CurrentStackHeight += GetIngredientStackThickness(ingredient);
 
             switch (ingredient.IngredientKind)
             {
@@ -464,6 +504,9 @@ namespace KitchenGame
 
             [NonSerialized]
             public int AcceptedLayerCount;
+
+            [NonSerialized]
+            public float CurrentStackHeight;
 
             [NonSerialized]
             public bool HasTopBun;
