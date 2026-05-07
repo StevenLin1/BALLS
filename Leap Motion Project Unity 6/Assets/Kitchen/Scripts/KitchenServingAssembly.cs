@@ -223,6 +223,7 @@ namespace KitchenGame
 
             SpawnServedVisual(slot, ingredient);
             ReleaseIngredient(ingredient);
+            ingredient.gameObject.SetActive(false);
             RegisterIngredient(ref slot, ingredient);
             Destroy(ingredient.gameObject);
 
@@ -273,8 +274,12 @@ namespace KitchenGame
             var verticalExtent = GetIngredientVerticalExtent(sourceIngredient);
             var targetPosition = slot.StackAnchor.position + Vector3.up * (stackHeight + verticalExtent);
             var targetRotation = GetServingRotation(slot, sourceIngredient);
+            var targetScale = sourceIngredient.transform.lossyScale;
 
-            var servedObject = Instantiate(sourceIngredient.gameObject, targetPosition, targetRotation, targetParent);
+            var servedObject = Instantiate(sourceIngredient.gameObject, targetPosition, targetRotation);
+            servedObject.transform.SetParent(targetParent, true);
+            ApplyWorldScale(servedObject.transform, targetScale);
+
             var servedIngredient = servedObject.GetComponent<KitchenIngredient>();
             if (servedIngredient != null)
             {
@@ -301,6 +306,25 @@ namespace KitchenGame
             {
                 interactionBehaviour.enabled = false;
             }
+        }
+
+        private static void ApplyWorldScale(Transform target, Vector3 desiredWorldScale)
+        {
+            if (target == null)
+            {
+                return;
+            }
+
+            var parentScale = target.parent != null ? target.parent.lossyScale : Vector3.one;
+            target.localScale = new Vector3(
+                SafeDivide(desiredWorldScale.x, parentScale.x),
+                SafeDivide(desiredWorldScale.y, parentScale.y),
+                SafeDivide(desiredWorldScale.z, parentScale.z));
+        }
+
+        private static float SafeDivide(float value, float divisor)
+        {
+            return Mathf.Abs(divisor) > 0.0001f ? value / divisor : value;
         }
 
         private static float GetIngredientVerticalExtent(KitchenIngredient ingredient)
