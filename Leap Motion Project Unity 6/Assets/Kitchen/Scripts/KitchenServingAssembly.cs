@@ -221,9 +221,10 @@ namespace KitchenGame
                 return false;
             }
 
+            SpawnServedVisual(slot, ingredient);
             ReleaseIngredient(ingredient);
-            SnapIngredientToSlot(slot, ingredient);
             RegisterIngredient(ref slot, ingredient);
+            Destroy(ingredient.gameObject);
 
             if (slot.IsCompleted)
             {
@@ -265,29 +266,40 @@ namespace KitchenGame
             }
         }
 
-        private void SnapIngredientToSlot(ServingOrderSlot slot, KitchenIngredient ingredient)
+        private void SpawnServedVisual(ServingOrderSlot slot, KitchenIngredient sourceIngredient)
         {
             var targetParent = slot.StackRoot != null ? slot.StackRoot : slot.StackAnchor;
-            var stackHeight = GetStackHeight(slot, ingredient);
-            var verticalExtent = GetIngredientVerticalExtent(ingredient);
+            var stackHeight = GetStackHeight(slot, sourceIngredient);
+            var verticalExtent = GetIngredientVerticalExtent(sourceIngredient);
             var targetPosition = slot.StackAnchor.position + Vector3.up * (stackHeight + verticalExtent);
+            var targetRotation = GetServingRotation(slot, sourceIngredient);
 
-            ingredient.transform.SetParent(targetParent, true);
-            ingredient.transform.position = targetPosition;
-            ingredient.transform.rotation = GetServingRotation(slot, ingredient);
+            var servedObject = Instantiate(sourceIngredient.gameObject, targetPosition, targetRotation, targetParent);
+            var servedIngredient = servedObject.GetComponent<KitchenIngredient>();
+            if (servedIngredient != null)
+            {
+                servedIngredient.enabled = false;
+            }
 
-            var rigidbody = ingredient.GetComponent<Rigidbody>();
-            if (rigidbody != null)
+            var rigidbodies = servedObject.GetComponentsInChildren<Rigidbody>(true);
+            foreach (var rigidbody in rigidbodies)
             {
                 rigidbody.linearVelocity = Vector3.zero;
                 rigidbody.angularVelocity = Vector3.zero;
                 rigidbody.isKinematic = true;
+                rigidbody.detectCollisions = false;
             }
 
-            if (ingredient.InteractionBehaviour != null)
+            var colliders = servedObject.GetComponentsInChildren<Collider>(true);
+            foreach (var servedCollider in colliders)
             {
-                ingredient.InteractionBehaviour.ignoreGrasping = true;
-                ingredient.InteractionBehaviour.ignoreContact = true;
+                servedCollider.enabled = false;
+            }
+
+            var interactionBehaviours = servedObject.GetComponentsInChildren<InteractionBehaviour>(true);
+            foreach (var interactionBehaviour in interactionBehaviours)
+            {
+                interactionBehaviour.enabled = false;
             }
         }
 
