@@ -25,6 +25,9 @@ namespace KitchenGame
         [SerializeField]
         private float serveTransferCooldownSeconds = 0.25f;
 
+        [SerializeField]
+        private float cookingDetectionRadius = 0.28f;
+
         private readonly Dictionary<KitchenIngredient, float> cookTimes = new();
         private float nextAllowedServeTransferTime;
 
@@ -48,13 +51,13 @@ namespace KitchenGame
 
         private void Update()
         {
-            if (station == null || !station.HasTool(requiredCookware))
+            if (station == null || !HasPanInCookingZone())
             {
                 cookTimes.Clear();
                 return;
             }
 
-            foreach (var ingredient in station.GetOccupants<KitchenIngredient>())
+            foreach (var ingredient in FindIngredientsInCookingZone())
             {
                 if (ingredient == null || ingredient.IngredientKind != KitchenIngredientKind.Meat)
                 {
@@ -143,7 +146,7 @@ namespace KitchenGame
                 return;
             }
 
-            var ingredient = station.GetNearestIngredient(station.ActionPosition, heldOnly: false, requireDualSidedCooking: false);
+            var ingredient = FindNearestCookedIngredientInZone();
             if (ingredient == null || ingredient.IngredientKind != KitchenIngredientKind.Meat)
             {
                 return;
@@ -162,6 +165,71 @@ namespace KitchenGame
 
             cookTimes.Remove(ingredient);
             nextAllowedServeTransferTime = Time.time + serveTransferCooldownSeconds;
+        }
+
+        private bool HasPanInCookingZone()
+        {
+            if (station.HasTool(requiredCookware))
+            {
+                return true;
+            }
+
+            var tools = FindObjectsByType<KitchenTool>(FindObjectsSortMode.None);
+            foreach (var tool in tools)
+            {
+                if (tool == null || tool.ToolType != requiredCookware)
+                {
+                    continue;
+                }
+
+                if (Vector3.Distance(tool.transform.position, station.ActionPosition) <= cookingDetectionRadius)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private IEnumerable<KitchenIngredient> FindIngredientsInCookingZone()
+        {
+            var ingredients = FindObjectsByType<KitchenIngredient>(FindObjectsSortMode.None);
+            foreach (var ingredient in ingredients)
+            {
+                if (ingredient == null || ingredient.IngredientKind != KitchenIngredientKind.Meat)
+                {
+                    continue;
+                }
+
+                if (Vector3.Distance(ingredient.transform.position, station.ActionPosition) <= cookingDetectionRadius)
+                {
+                    yield return ingredient;
+                }
+            }
+        }
+
+        private KitchenIngredient FindNearestCookedIngredientInZone()
+        {
+            KitchenIngredient best = null;
+            var bestDistance = float.PositiveInfinity;
+
+            foreach (var ingredient in FindIngredientsInCookingZone())
+            {
+                if (ingredient.CurrentState != KitchenIngredientState.Cooked &&
+                    ingredient.CurrentState != KitchenIngredientState.Burnt)
+                {
+                    continue;
+                }
+
+                var distance = Vector3.Distance(ingredient.transform.position, station.ActionPosition);
+                if (distance < bestDistance)
+                {
+                    best = ingredient;
+                    bestDistance = distance;
+                }
+            }
+
+            return best;
         }
     }
 }
