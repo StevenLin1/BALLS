@@ -287,7 +287,7 @@ namespace KitchenGame
             var targetParent = slot.StackRoot != null ? slot.StackRoot : slot.StackAnchor;
             var ingredientThickness = GetIngredientStackThickness(sourceIngredient);
             var targetPosition = slot.StackAnchor.position +
-                                 Vector3.up * (stackBaseOffset + slot.CurrentStackHeight + ingredientThickness * 0.5f);
+                                 Vector3.up * (stackBaseOffset + slot.CurrentStackHeight);
             var targetRotation = GetServingRotation(slot, sourceIngredient);
             var targetScale = sourceIngredient.transform.lossyScale;
 
@@ -330,6 +330,8 @@ namespace KitchenGame
                 return;
             }
 
+            ingredient.enabled = false;
+
             var rigidbodies = ingredient.GetComponentsInChildren<Rigidbody>(true);
             foreach (var rigidbody in rigidbodies)
             {
@@ -356,6 +358,10 @@ namespace KitchenGame
             {
                 interactionBehaviour.enabled = false;
             }
+
+            ingredient.transform.SetParent(null, true);
+            ingredient.transform.position = new Vector3(10000f, 10000f, 10000f);
+            ingredient.gameObject.SetActive(false);
         }
 
         private static void ApplyWorldScale(Transform target, Vector3 desiredWorldScale)
