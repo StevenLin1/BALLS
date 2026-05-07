@@ -73,6 +73,11 @@ namespace KitchenGame
                 return;
             }
 
+            if (!IsIngredientInsideServingZone(ingredient))
+            {
+                return;
+            }
+
             var instanceId = ingredient.gameObject.GetInstanceID();
             if (consumedInstanceIds.Contains(instanceId))
             {
@@ -102,7 +107,7 @@ namespace KitchenGame
                     continue;
                 }
 
-                if (!servingDetectionZone.bounds.Contains(ingredient.transform.position))
+                if (!IsIngredientInsideServingZone(ingredient))
                 {
                     continue;
                 }
@@ -120,6 +125,32 @@ namespace KitchenGame
 
                 consumedInstanceIds.Add(instanceId);
             }
+        }
+
+        private bool IsIngredientInsideServingZone(KitchenIngredient ingredient)
+        {
+            if (ingredient == null || servingDetectionZone == null)
+            {
+                return false;
+            }
+
+            var zoneBounds = servingDetectionZone.bounds;
+            var ingredientColliders = ingredient.GetComponentsInChildren<Collider>(true);
+            foreach (var ingredientCollider in ingredientColliders)
+            {
+                if (ingredientCollider == null || ingredientCollider == servingDetectionZone || !ingredientCollider.enabled)
+                {
+                    continue;
+                }
+
+                if (zoneBounds.Intersects(ingredientCollider.bounds))
+                {
+                    return true;
+                }
+            }
+
+            var closestPoint = zoneBounds.ClosestPoint(ingredient.transform.position);
+            return Vector3.Distance(closestPoint, ingredient.transform.position) <= 0.03f;
         }
 
         public bool TryConsumeIngredientDirect(KitchenIngredient ingredient)
