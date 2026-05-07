@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace KitchenGame
@@ -15,6 +16,7 @@ namespace KitchenGame
         [SerializeField]
         private Vector2 panelOffset = new Vector2(0f, -10f);
 
+        private static KitchenOrderUi instance;
         private RectTransform rootPanel;
         private OrderRowUi[] rows;
         private float nextRefreshTime;
@@ -22,6 +24,11 @@ namespace KitchenGame
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Bootstrap()
         {
+            if (instance != null)
+            {
+                return;
+            }
+
             var host = new GameObject("KitchenOrderUi");
             DontDestroyOnLoad(host);
             host.AddComponent<KitchenOrderUi>();
@@ -29,23 +36,67 @@ namespace KitchenGame
 
         private void Awake()
         {
-            if (servingAssembly == null)
+            if (instance != null && instance != this)
             {
-                servingAssembly = FindFirstObjectByType<KitchenServingAssembly>();
+                Destroy(gameObject);
+                return;
             }
 
-            CreateUi();
+            instance = this;
+            SceneManager.sceneLoaded += HandleSceneLoaded;
+
+            RebindServingAssembly();
+            EnsureUi();
             RefreshNow();
+        }
+
+        private void OnDestroy()
+        {
+            if (instance == this)
+            {
+                instance = null;
+            }
+
+            SceneManager.sceneLoaded -= HandleSceneLoaded;
         }
 
         private void Update()
         {
+            EnsureUi();
+
             if (Time.unscaledTime < nextRefreshTime)
             {
                 return;
             }
 
             RefreshNow();
+        }
+
+        private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            RebindServingAssembly();
+            EnsureUi(forceRecreate: true);
+            RefreshNow();
+        }
+
+        private void RebindServingAssembly()
+        {
+            servingAssembly = FindFirstObjectByType<KitchenServingAssembly>();
+        }
+
+        private void EnsureUi(bool forceRecreate = false)
+        {
+            if (!forceRecreate && rootPanel != null && rootPanel.gameObject != null && rootPanel.transform.parent != null)
+            {
+                return;
+            }
+
+            if (rootPanel != null && rootPanel.gameObject != null)
+            {
+                Destroy(rootPanel.gameObject);
+            }
+
+            CreateUi();
         }
 
         private void CreateUi()
@@ -97,6 +148,11 @@ namespace KitchenGame
         private void RefreshNow()
         {
             nextRefreshTime = Time.unscaledTime + 0.15f;
+
+            if (servingAssembly == null)
+            {
+                RebindServingAssembly();
+            }
 
             if (rows == null || rows.Length == 0)
             {

@@ -236,10 +236,14 @@ namespace KitchenGame
 
         private void SnapIngredientToSlot(ServingOrderSlot slot, KitchenIngredient ingredient)
         {
-            var targetPosition = slot.StackAnchor.position + Vector3.up * GetStackHeight(slot, ingredient);
-            ingredient.transform.SetParent(slot.StackRoot != null ? slot.StackRoot : slot.StackAnchor, true);
+            var targetParent = slot.StackRoot != null ? slot.StackRoot : slot.StackAnchor;
+            var stackHeight = GetStackHeight(slot, ingredient);
+            var verticalExtent = GetIngredientVerticalExtent(ingredient);
+            var targetPosition = slot.StackAnchor.position + Vector3.up * (stackHeight + verticalExtent);
+
+            ingredient.transform.SetParent(targetParent, true);
             ingredient.transform.position = targetPosition;
-            ingredient.transform.rotation = slot.StackAnchor.rotation;
+            ingredient.transform.rotation = GetServingRotation(slot, ingredient);
 
             var rigidbody = ingredient.GetComponent<Rigidbody>();
             if (rigidbody != null)
@@ -254,6 +258,28 @@ namespace KitchenGame
                 ingredient.InteractionBehaviour.ignoreGrasping = true;
                 ingredient.InteractionBehaviour.ignoreContact = true;
             }
+        }
+
+        private static float GetIngredientVerticalExtent(KitchenIngredient ingredient)
+        {
+            var collider = ingredient.GetComponent<Collider>();
+            if (collider == null)
+            {
+                return 0f;
+            }
+
+            return Mathf.Max(0f, collider.bounds.extents.y);
+        }
+
+        private static Quaternion GetServingRotation(ServingOrderSlot slot, KitchenIngredient ingredient)
+        {
+            var euler = slot.StackAnchor.rotation.eulerAngles;
+            return ingredient.IngredientKind switch
+            {
+                KitchenIngredientKind.Cheese => Quaternion.Euler(0f, euler.y, 0f),
+                KitchenIngredientKind.Vegetable => Quaternion.Euler(0f, euler.y, 0f),
+                _ => slot.StackAnchor.rotation
+            };
         }
 
         private float GetStackHeight(ServingOrderSlot slot, KitchenIngredient ingredient)

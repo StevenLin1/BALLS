@@ -7,6 +7,8 @@ namespace KitchenGame
 {
     public class KitchenRuntimeResetHotkey : MonoBehaviour
     {
+        private static KitchenRuntimeResetHotkey instance;
+
         [SerializeField]
         private KeyCode resetKey = KeyCode.R;
 
@@ -16,9 +18,16 @@ namespace KitchenGame
         [SerializeField]
         private string hintText = "R Reset";
 
+        private RectTransform hintRoot;
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Bootstrap()
         {
+            if (instance != null)
+            {
+                return;
+            }
+
             var host = new GameObject("KitchenRuntimeResetHotkey");
             DontDestroyOnLoad(host);
             host.AddComponent<KitchenRuntimeResetHotkey>();
@@ -26,11 +35,31 @@ namespace KitchenGame
 
         private void Awake()
         {
-            CreateHintUi();
+            if (instance != null && instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            instance = this;
+            SceneManager.sceneLoaded += HandleSceneLoaded;
+            EnsureHintUi();
+        }
+
+        private void OnDestroy()
+        {
+            if (instance == this)
+            {
+                instance = null;
+            }
+
+            SceneManager.sceneLoaded -= HandleSceneLoaded;
         }
 
         private void Update()
         {
+            EnsureHintUi();
+
             if (requirePlayMode && !Application.isPlaying)
             {
                 return;
@@ -50,6 +79,26 @@ namespace KitchenGame
             SceneManager.LoadScene(activeScene.buildIndex);
         }
 
+        private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            EnsureHintUi(forceRecreate: true);
+        }
+
+        private void EnsureHintUi(bool forceRecreate = false)
+        {
+            if (!forceRecreate && hintRoot != null && hintRoot.gameObject != null && hintRoot.transform.parent != null)
+            {
+                return;
+            }
+
+            if (hintRoot != null && hintRoot.gameObject != null)
+            {
+                Destroy(hintRoot.gameObject);
+            }
+
+            CreateHintUi();
+        }
+
         private void CreateHintUi()
         {
             var canvas = FindOverlayCanvas();
@@ -63,15 +112,11 @@ namespace KitchenGame
                 DontDestroyOnLoad(canvasObject);
             }
 
-            if (canvas.transform.Find("ResetHint") != null)
-            {
-                return;
-            }
-
             var root = new GameObject("ResetHint");
             root.transform.SetParent(canvas.transform, false);
 
             var rect = root.AddComponent<RectTransform>();
+            hintRoot = rect;
             rect.anchorMin = new Vector2(0f, 0f);
             rect.anchorMax = new Vector2(0f, 0f);
             rect.pivot = new Vector2(0f, 0f);
