@@ -30,6 +30,17 @@ namespace KitchenGame
             }
 
             TryAutoSlice(collision.collider);
+            TryPanInteractions(collision.collider);
+        }
+
+        private void OnCollisionStay(Collision collision)
+        {
+            if (collision == null)
+            {
+                return;
+            }
+
+            TryPanInteractions(collision.collider);
         }
 
         private void TryAutoSlice(Collider other)
@@ -101,8 +112,7 @@ namespace KitchenGame
 
         private void TryServeFromPan(Collider other)
         {
-            var panTool = other.GetComponentInParent<KitchenTool>();
-            if (panTool == null || panTool.ToolType != KitchenToolType.Pan)
+            if (!IsStoveServeSurface(other))
             {
                 return;
             }
@@ -115,6 +125,28 @@ namespace KitchenGame
                     return;
                 }
             }
+        }
+
+        private static bool IsStoveServeSurface(Collider other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            var panTool = other.GetComponentInParent<KitchenTool>();
+            if (panTool != null && panTool.ToolType == KitchenToolType.Pan)
+            {
+                return true;
+            }
+
+            if (other.GetComponentInParent<KitchenStoveCooker>() != null)
+            {
+                return true;
+            }
+
+            var station = other.GetComponentInParent<KitchenStation>();
+            return station != null && station.StationType == KitchenStationType.Stove;
         }
     }
 }
