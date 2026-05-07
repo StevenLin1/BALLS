@@ -10,6 +10,9 @@ namespace KitchenGame
         [SerializeField]
         private float instantSliceCooldownSeconds = 0.15f;
 
+        [SerializeField]
+        private float panSnapHeightOffset = 0.025f;
+
         private float nextAllowedInstantSliceTime;
 
         public KitchenToolType ToolType => toolType;
@@ -48,6 +51,70 @@ namespace KitchenGame
             }
 
             nextAllowedInstantSliceTime = Time.time + instantSliceCooldownSeconds;
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            TryPanInteractions(other);
+        }
+
+        private void TryPanInteractions(Collider other)
+        {
+            if (other == null)
+            {
+                return;
+            }
+
+            if (toolType == KitchenToolType.Pan)
+            {
+                TrySnapMeatIntoPan(other);
+            }
+            else if (toolType == KitchenToolType.Spatula)
+            {
+                TryServeFromPan(other);
+            }
+        }
+
+        private void TrySnapMeatIntoPan(Collider other)
+        {
+            var ingredient = other.GetComponentInParent<KitchenIngredient>();
+            if (ingredient == null || ingredient.IngredientKind != KitchenIngredientKind.Meat)
+            {
+                return;
+            }
+
+            var rigidbody = ingredient.GetComponent<Rigidbody>();
+            if (rigidbody != null)
+            {
+                rigidbody.linearVelocity = Vector3.zero;
+                rigidbody.angularVelocity = Vector3.zero;
+            }
+
+            var ownCollider = GetComponent<Collider>();
+            var targetPosition = ownCollider != null
+                ? ownCollider.bounds.center + Vector3.up * panSnapHeightOffset
+                : transform.position + Vector3.up * panSnapHeightOffset;
+
+            ingredient.transform.SetParent(transform, true);
+            ingredient.transform.position = targetPosition;
+        }
+
+        private void TryServeFromPan(Collider other)
+        {
+            var panTool = other.GetComponentInParent<KitchenTool>();
+            if (panTool == null || panTool.ToolType != KitchenToolType.Pan)
+            {
+                return;
+            }
+
+            var stoveCookers = FindObjectsByType<KitchenStoveCooker>(FindObjectsSortMode.None);
+            foreach (var stoveCooker in stoveCookers)
+            {
+                if (stoveCooker != null && stoveCooker.TryServeNearestCookedMeat())
+                {
+                    return;
+                }
+            }
         }
     }
 }

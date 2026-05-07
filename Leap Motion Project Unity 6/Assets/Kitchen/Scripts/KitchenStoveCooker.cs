@@ -90,6 +90,29 @@ namespace KitchenGame
             TryServeCookedMeat(other);
         }
 
+        public bool TryServeNearestCookedMeat()
+        {
+            if (Time.time < nextAllowedServeTransferTime || servingAssembly == null)
+            {
+                return false;
+            }
+
+            var ingredient = FindNearestCookedIngredientInZone();
+            if (ingredient == null || ingredient.IngredientKind != KitchenIngredientKind.Meat)
+            {
+                return false;
+            }
+
+            if (!servingAssembly.TryConsumeIngredientDirect(ingredient))
+            {
+                return false;
+            }
+
+            cookTimes.Remove(ingredient);
+            nextAllowedServeTransferTime = Time.time + serveTransferCooldownSeconds;
+            return true;
+        }
+
         private void AdvanceMeatCooking(KitchenIngredient ingredient, float deltaTime)
         {
             if (ingredient.CurrentState == KitchenIngredientState.Burnt || ingredient.CurrentState == KitchenIngredientState.Plated)
@@ -135,7 +158,7 @@ namespace KitchenGame
 
         private void TryServeCookedMeat(Collider other)
         {
-            if (Time.time < nextAllowedServeTransferTime || servingAssembly == null || other == null)
+            if (other == null)
             {
                 return;
             }
@@ -146,25 +169,7 @@ namespace KitchenGame
                 return;
             }
 
-            var ingredient = FindNearestCookedIngredientInZone();
-            if (ingredient == null || ingredient.IngredientKind != KitchenIngredientKind.Meat)
-            {
-                return;
-            }
-
-            if (ingredient.CurrentState != KitchenIngredientState.Cooked &&
-                ingredient.CurrentState != KitchenIngredientState.Burnt)
-            {
-                return;
-            }
-
-            if (!servingAssembly.TryConsumeIngredientDirect(ingredient))
-            {
-                return;
-            }
-
-            cookTimes.Remove(ingredient);
-            nextAllowedServeTransferTime = Time.time + serveTransferCooldownSeconds;
+            TryServeNearestCookedMeat();
         }
 
         private bool HasPanInCookingZone()
