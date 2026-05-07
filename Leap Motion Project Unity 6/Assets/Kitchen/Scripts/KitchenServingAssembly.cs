@@ -31,6 +31,9 @@ namespace KitchenGame
         [SerializeField]
         private int minimumCompletedOrderScore = 50;
 
+        [SerializeField]
+        private Collider servingDetectionZone;
+
         private int currentOrderIndex;
         private readonly HashSet<int> consumedInstanceIds = new();
 
@@ -45,6 +48,16 @@ namespace KitchenGame
             {
                 gameManager = FindFirstObjectByType<KitchenGameManager>();
             }
+
+            if (servingDetectionZone == null)
+            {
+                servingDetectionZone = GetComponent<Collider>();
+            }
+        }
+
+        private void Update()
+        {
+            TryConsumeHeldIngredientsInZone();
         }
 
         private void OnTriggerStay(Collider other)
@@ -72,6 +85,41 @@ namespace KitchenGame
             }
 
             consumedInstanceIds.Add(instanceId);
+        }
+
+        private void TryConsumeHeldIngredientsInZone()
+        {
+            if (currentOrderIndex >= orderSlots.Length || servingDetectionZone == null)
+            {
+                return;
+            }
+
+            var ingredients = FindObjectsByType<KitchenIngredient>(FindObjectsSortMode.None);
+            foreach (var ingredient in ingredients)
+            {
+                if (ingredient == null || !ingredient.IsHeld)
+                {
+                    continue;
+                }
+
+                if (!servingDetectionZone.bounds.Contains(ingredient.transform.position))
+                {
+                    continue;
+                }
+
+                var instanceId = ingredient.gameObject.GetInstanceID();
+                if (consumedInstanceIds.Contains(instanceId))
+                {
+                    continue;
+                }
+
+                if (!TryConsumeIngredient(ingredient))
+                {
+                    continue;
+                }
+
+                consumedInstanceIds.Add(instanceId);
+            }
         }
 
         public bool TryConsumeIngredientDirect(KitchenIngredient ingredient)
