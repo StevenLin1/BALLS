@@ -4,6 +4,15 @@ namespace KitchenGame
 {
     public class KitchenZoneMover : MonoBehaviour
     {
+        public enum MovementMode
+        {
+            ZoneStep,
+            ContinuousWASD
+        }
+
+        [SerializeField]
+        private MovementMode movementMode = MovementMode.ContinuousWASD;
+
         [SerializeField]
         private Transform[] zoneAnchors;
 
@@ -15,6 +24,9 @@ namespace KitchenGame
 
         [SerializeField]
         private bool snapToStartingZoneOnEnable = true;
+
+        [SerializeField]
+        private Transform movementReference;
 
         private int currentZoneIndex;
         private Vector3 targetPosition;
@@ -34,21 +46,31 @@ namespace KitchenGame
                 Initialize();
             }
 
-            if (zoneAnchors == null || zoneAnchors.Length == 0)
+            if (movementMode == MovementMode.ZoneStep)
             {
-                return;
+                if (zoneAnchors == null || zoneAnchors.Length == 0)
+                {
+                    return;
+                }
+
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    MoveToZone(currentZoneIndex - 1);
+                }
+                else if (Input.GetKeyDown(KeyCode.D))
+                {
+                    MoveToZone(currentZoneIndex + 1);
+                }
+            }
+            else
+            {
+                UpdateContinuousMovement();
             }
 
-            if (Input.GetKeyDown(KeyCode.A))
+            if (movementMode == MovementMode.ZoneStep)
             {
-                MoveToZone(currentZoneIndex - 1);
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
             }
-            else if (Input.GetKeyDown(KeyCode.D))
-            {
-                MoveToZone(currentZoneIndex + 1);
-            }
-
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         }
 
         public void MoveToZone(int zoneIndex)
@@ -66,18 +88,76 @@ namespace KitchenGame
         {
             initialized = true;
 
-            if (zoneAnchors == null || zoneAnchors.Length == 0)
+            if (movementReference == null && Camera.main != null)
+            {
+                movementReference = Camera.main.transform;
+            }
+
+            if (movementMode == MovementMode.ZoneStep)
+            {
+                if (zoneAnchors == null || zoneAnchors.Length == 0)
+                {
+                    targetPosition = transform.position;
+                    return;
+                }
+
+                currentZoneIndex = Mathf.Clamp(startingZoneIndex, 0, zoneAnchors.Length - 1);
+                targetPosition = zoneAnchors[currentZoneIndex].position;
+
+                if (snapToStartingZoneOnEnable)
+                {
+                    transform.position = targetPosition;
+                }
+            }
+            else
+            {
+                targetPosition = transform.position;
+            }
+        }
+
+        private void UpdateContinuousMovement()
+        {
+            var input = Vector2.zero;
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                input.x -= 1f;
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                input.x += 1f;
+            }
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                input.y -= 1f;
+            }
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                input.y += 1f;
+            }
+
+            if (input.sqrMagnitude <= 0.0001f)
             {
                 return;
             }
 
-            currentZoneIndex = Mathf.Clamp(startingZoneIndex, 0, zoneAnchors.Length - 1);
-            targetPosition = zoneAnchors[currentZoneIndex].position;
+            input = input.normalized;
 
-            if (snapToStartingZoneOnEnable)
-            {
-                transform.position = targetPosition;
-            }
+            var reference = movementReference != null ? movementReference : transform;
+
+            var forward = reference.forward;
+            forward.y = 0f;
+            forward = forward.sqrMagnitude > 0.0001f ? forward.normalized : Vector3.forward;
+
+            var right = reference.right;
+            right.y = 0f;
+            right = right.sqrMagnitude > 0.0001f ? right.normalized : Vector3.right;
+
+            var movement = (right * input.x + forward * input.y) * moveSpeed * Time.deltaTime;
+            transform.position += movement;
         }
     }
 }
