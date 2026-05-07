@@ -5747,12 +5747,7 @@ MonoBehaviour:
     maxVegetableCount: 2
   gameManager: {fileID: 1899228965}
   stackHeightPerLayer: 0.025
-  topBunHeightBonus: 0.03
-  stackBaseOffset: 0.05
-  meatStackThickness: 0.024
-  cheeseStackThickness: 0.008
-  vegetableStackThickness: 0.01
-  topBunStackThickness: 0.03
+  topBunHeightBonus: 0.01
   completedOrderBaseScore: 200
   ingredientMismatchPenalty: 35
   burntMeatPenalty: 50
