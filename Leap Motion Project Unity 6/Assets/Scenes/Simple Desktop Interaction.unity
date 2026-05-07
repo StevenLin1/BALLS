@@ -2324,6 +2324,7 @@ MonoBehaviour:
   - {fileID: 662219255}
   startingZoneIndex: 0
   moveSpeed: 2
+  verticalMoveSpeed: 2.5
   snapToStartingZoneOnEnable: 1
   movementReference: {fileID: 0}
 --- !u!1 &763082422
@@ -5546,7 +5547,7 @@ PrefabInstance:
     - target: {fileID: 7266952170646613043, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}
       propertyPath: m_Size.x
-      value: 0.04
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 7266952170646613043, guid: e2013dc2188d6423f8e140a476a0739e,
         type: 3}

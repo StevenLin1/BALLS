@@ -23,6 +23,9 @@ namespace KitchenGame
         private float moveSpeed = 3.5f;
 
         [SerializeField]
+        private float verticalMoveSpeed = 2.5f;
+
+        [SerializeField]
         private bool snapToStartingZoneOnEnable = true;
 
         [SerializeField]
@@ -139,9 +142,23 @@ namespace KitchenGame
                 input.y += 1f;
             }
 
+            var verticalInput = 0f;
+            if (Input.GetKey(KeyCode.Q))
+            {
+                verticalInput -= 1f;
+            }
+
+            if (Input.GetKey(KeyCode.E))
+            {
+                verticalInput += 1f;
+            }
+
             if (input.sqrMagnitude <= 0.0001f)
             {
-                return;
+                if (Mathf.Abs(verticalInput) <= 0.0001f)
+                {
+                    return;
+                }
             }
 
             input = input.normalized;
@@ -156,7 +173,9 @@ namespace KitchenGame
             right.y = 0f;
             right = right.sqrMagnitude > 0.0001f ? right.normalized : Vector3.right;
 
-            var movement = (right * input.x + forward * input.y) * moveSpeed * Time.deltaTime;
+            var movement =
+                (right * input.x + forward * input.y) * moveSpeed * Time.deltaTime +
+                Vector3.up * (verticalInput * verticalMoveSpeed * Time.deltaTime);
             transform.position += movement;
         }
     }
