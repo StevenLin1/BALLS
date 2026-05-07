@@ -5752,6 +5752,7 @@ MonoBehaviour:
   ingredientMismatchPenalty: 35
   burntMeatPenalty: 50
   minimumCompletedOrderScore: 50
+  servingDetectionZone: {fileID: 1924287001}
 --- !u!1001 &1941408808
 PrefabInstance:
   m_ObjectHideFlags: 0
