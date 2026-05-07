@@ -511,15 +511,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5443851239780794941, guid: 662b856321eb7d04b88f855ea068fa90,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1182464223}
-    - targetCorrespondingSourceObject: {fileID: 5443851239780794941, guid: 662b856321eb7d04b88f855ea068fa90,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1182464224}
-    - targetCorrespondingSourceObject: {fileID: 5443851239780794941, guid: 662b856321eb7d04b88f855ea068fa90,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1182464225}
     - targetCorrespondingSourceObject: {fileID: 3015292352635741396, guid: 662b856321eb7d04b88f855ea068fa90,
         type: 3}
       insertIndex: -1
@@ -3445,37 +3437,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: Kitchen Item
-  interactionBehaviour: {fileID: 1182464225}
+  interactionBehaviour: {fileID: 0}
   toolType: 1
   instantSliceCooldownSeconds: 0.15
   panSnapHeightOffset: 0.025
---- !u!54 &1182464223
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1182464218}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &1182464224
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3491,43 +3456,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.9987609, y: 0.3198094, z: 1.9965681}
-  m_Center: {x: 0.0000022626705, y: 0.15990372, z: 0.0000021642936}
---- !u!114 &1182464225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1182464218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f10fa40360571247a7ca806d6859557, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _manager: {fileID: 304069433}
-  _ignoreHoverMode: 0
-  _isIgnoringAllHoverState: 0
-  _ignorePrimaryHover: 0
-  _ignoreContact: 0
-  _ignoreGraspingMode: 0
-  _ignoreGrasping: 0
-  _contactForceMode: 0
-  _allowMultiGrasp: 0
-  _moveObjectWhenGrasped: 1
-  graspedMovementType: 0
-  _overrideInteractionLayer: 0
-  _interactionLayer:
-    layerIndex: 0
-  _overrideNoContactLayer: 0
-  _noContactLayer:
-    layerIndex: 0
-  _eventTable:
-    _entries: []
+  m_Size: {x: 1.9987609, y: 0.7311183, z: 1.9965681}
+  m_Center: {x: 0.0000022626705, y: 0.36555818, z: 0.0000021642936}
 --- !u!1 &1207310127 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3015292352635741396, guid: 662b856321eb7d04b88f855ea068fa90,
