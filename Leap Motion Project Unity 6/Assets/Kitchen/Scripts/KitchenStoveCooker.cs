@@ -113,6 +113,34 @@ namespace KitchenGame
             return true;
         }
 
+        public bool TryServeIngredientDirect(KitchenIngredient ingredient)
+        {
+            if (Time.time < nextAllowedServeTransferTime || servingAssembly == null || ingredient == null)
+            {
+                return false;
+            }
+
+            if (ingredient.IngredientKind != KitchenIngredientKind.Meat)
+            {
+                return false;
+            }
+
+            if (ingredient.CurrentState != KitchenIngredientState.Cooked &&
+                ingredient.CurrentState != KitchenIngredientState.Burnt)
+            {
+                return false;
+            }
+
+            if (!servingAssembly.TryConsumeIngredientDirect(ingredient))
+            {
+                return false;
+            }
+
+            cookTimes.Remove(ingredient);
+            nextAllowedServeTransferTime = Time.time + serveTransferCooldownSeconds;
+            return true;
+        }
+
         private void AdvanceMeatCooking(KitchenIngredient ingredient, float deltaTime)
         {
             if (ingredient.CurrentState == KitchenIngredientState.Burnt || ingredient.CurrentState == KitchenIngredientState.Plated)

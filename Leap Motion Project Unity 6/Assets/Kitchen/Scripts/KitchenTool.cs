@@ -82,7 +82,7 @@ namespace KitchenGame
             }
             else if (toolType == KitchenToolType.Spatula)
             {
-                TryServeFromPan(other);
+                TryServeMeat(other);
             }
         }
 
@@ -110,9 +110,10 @@ namespace KitchenGame
             ingredient.transform.position = targetPosition;
         }
 
-        private void TryServeFromPan(Collider other)
+        private void TryServeMeat(Collider other)
         {
-            if (!IsStoveServeSurface(other))
+            var ingredient = other.GetComponentInParent<KitchenIngredient>();
+            if (ingredient == null || ingredient.IngredientKind != KitchenIngredientKind.Meat)
             {
                 return;
             }
@@ -120,33 +121,11 @@ namespace KitchenGame
             var stoveCookers = FindObjectsByType<KitchenStoveCooker>(FindObjectsSortMode.None);
             foreach (var stoveCooker in stoveCookers)
             {
-                if (stoveCooker != null && stoveCooker.TryServeNearestCookedMeat())
+                if (stoveCooker != null && stoveCooker.TryServeIngredientDirect(ingredient))
                 {
                     return;
                 }
             }
-        }
-
-        private static bool IsStoveServeSurface(Collider other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-
-            var panTool = other.GetComponentInParent<KitchenTool>();
-            if (panTool != null && panTool.ToolType == KitchenToolType.Pan)
-            {
-                return true;
-            }
-
-            if (other.GetComponentInParent<KitchenStoveCooker>() != null)
-            {
-                return true;
-            }
-
-            var station = other.GetComponentInParent<KitchenStation>();
-            return station != null && station.StationType == KitchenStationType.Stove;
         }
     }
 }
